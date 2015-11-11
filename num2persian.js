@@ -1,7 +1,7 @@
 /**
 	Name:Javascript Number To Persian Convertor.
 	Author:Mahmoud Eskanadri.
-	Copyright:2015 Webafrooz.com.
+	Copyright:2015 http://Webafrooz.com.
 	Licence: GNU Licence 2.4
 	version:1.0.2
 	Email:info@webafrooz.com,sbs8@yahoo.com
