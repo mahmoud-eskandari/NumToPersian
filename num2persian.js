@@ -3,7 +3,7 @@
 	Author:Mahmoud Eskanadri.
 	Copyright:2015 http://Webafrooz.com.
 	Licence: GNU Licence 2.4
-	version:1.0.2
+	version:1.0.3
 	Email:info@webafrooz.com,sbs8@yahoo.com
 	Programming With love in Webafrooz.
 **/
@@ -64,23 +64,27 @@ function NumToPersian(num,tt){
 		
 		if(len == 3){
 			//FOR Min of 1000
-			for(var i = 0;i < ar.length;i++){
-				if(ar[i] != 0){
-					// Sadgan
-					if(i == 0)
-						sstack.push(persian[2][ar[i]]);
-					//Dahgan
-					if(i == 1){
-						var baghi = parseInt(ar[i]+ar[i+1]);
-						//console.log(baghi);
-						if(baghi > 19)
-							sstack.push(persian[1][ar[i]]);
-						else
-							sstack.push(persian[4][ar[i+1]]);
-					}
-					//Yekan
-					if(i == 2 && ar[i] != 0 && parseInt(ar[i-1]) > 1){
-						sstack.push(persian[0][ar[i]]);
+			if(parseInt(ar[0]+ar[1]) == 0){
+				sstack.push(persian[0][ar[2]]);
+			}else{
+				for(var i = 0;i < ar.length;i++){
+					if(ar[i] != 0){
+						// Sadgan
+						if(i == 0)
+							sstack.push(persian[2][ar[i]]);
+						//Dahgan
+						if(i == 1){
+							var baghi = parseInt(ar[i]+ar[i+1]);
+							//console.log(baghi);
+							if(baghi > 19)
+								sstack.push(persian[1][ar[i]]);
+							else
+								sstack.push(persian[4][ar[i+1]]);
+						}
+						//Yekan
+						if(i == 2 && ar[i] != 0 && parseInt(ar[i-1]) > 1){
+							sstack.push(persian[0][ar[i]]);
+						}
 					}
 				}
 			}
