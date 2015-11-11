@@ -1,6 +1,6 @@
 # NumToPersian
 Convert numbers to letters in Persian
-#تبدیل عدد به حروف فارسی
+#تبدیل عدد به حروف فارسی در جاوا اسکریپت
 #No need to jQuery!
 #Tested and reliable
 #Easy to use
