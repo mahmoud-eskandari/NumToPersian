@@ -82,7 +82,7 @@ function NumToPersian(num,tt){
 								sstack.push(persian[4][ar[i+1]]);
 						}
 						//Yekan
-						if(i == 2 && ar[i] != 0 && parseInt(ar[i-1]) > 1){
+						if(i == 2 && ar[i] != 0 ){
 							sstack.push(persian[0][ar[i]]);
 						}
 					}
