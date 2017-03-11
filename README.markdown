@@ -9,3 +9,5 @@ just Call `NumToPersian`
 ```javascript
 <script> alert(NumToPersian(1250)) </script>
 ```
+CDN:
+[https://rawgit.com/mahmoud-eskandari/NumToPersian/master/num2persian.min.js]
