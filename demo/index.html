@@ -31,17 +31,17 @@
 	</style>
 	<!-- Created With Love By Mahmoud Eskandari info@webafrooz.com-->
 	<!-- Dont Remove Copyright ! -->
-	<script src="../num2persian.min.js" type="text/javascript" ></script>
+	<script src="../num2persian.js" type="text/javascript" ></script>
 </head>
 <body>
 <div id="container" >
 	<!-- Demo 1 -->
 	<label for="demo1" >نمایش به صورت هشداری:</label>
-	<input id="demo1" type="number" placeholder="عددي در اين فيلد وارد کنيد" onchange="alert(NumToPersian(this.value))" >
+	<input id="demo1" type="number" placeholder="عددي در اين فيلد وارد کنيد" onchange="alert(this.value.toPersian())" >
 	<!-- Demo 2 -->
 	<p>
 		<label for="demo2" >چاپ حروف:</label>
-		<input id="demo2" type="number" placeholder="عددي در اين فيلد وارد کنيد" onchange="document.getElementById('demo_out2').innerHTML = NumToPersian(this.value)" >
+		<input id="demo2" type="number" placeholder="عددي در اين فيلد وارد کنيد" onchange="document.getElementById('demo_out2').innerHTML = this.value.toPersian()" >
 	</p>
 	<br>
 	<div id="demo_out2" ></div>
@@ -58,7 +58,7 @@
        e.oninput = myHandler;
        e.onpropertychange = e.oninput; // for IE8
        function myHandler(){
-		document.getElementById('demo_out3').innerHTML = NumToPersian(e.value)
+		document.getElementById('demo_out3').innerHTML = e.value.toPersian();
 	   }
     };
 	</script>
