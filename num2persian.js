@@ -3,7 +3,7 @@
  Author:Mahmoud Eskanadri.
  Copyright:2015 http://Webafrooz.com.
  Licence: GNU Licence 2.4
- version:1.1.0
+ version:1.1.1
  Email:info@webafrooz.com,sbs8@yahoo.com
  Programming With love in Webafrooz.
  **/
@@ -39,6 +39,9 @@ function NumToPersian(num, tt) {
     if (typeof(tt) === 'undefined') {
         tt = 0;
     }
+    if(typeof(num) === 'number'){
+		num = num.toString();
+	}
     var let_stack = [];
     //num = num.toString();
     len = num.length;
