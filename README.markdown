@@ -2,17 +2,17 @@
 
 Convert numbers to Persian letters in  JavaScript
 
-#تبدیل عدد به حروف فارسی در جاوا اسکریپت
+# تبدیل عدد به حروف فارسی در جاوا اسکریپت
 
-#No need to jQuery!
+# No need to jQuery!
 
-#Tested and reliable
+# Tested and reliable
 
-#Easy to use
+# Easy to use
 
 just Call `NumToPersian` or use `toPersian()` Prototype.
 
-#Example
+# Example
 
 ```javascript
 <script>
