@@ -16,8 +16,8 @@ just Call `NumToPersian` or use `toPersian()` Prototype.
 
 ```javascript
 <script>
-  console.log(NumToPersian(1250)+'[with function]');
-  console.log("1250".toPersian()+'[with prototype]');
+  console.log(NumToPersian(1250)+'[by function]');
+  console.log("1250".toPersian()+'[by prototype]');
 </script>
 ```
 
