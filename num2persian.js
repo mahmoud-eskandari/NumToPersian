@@ -56,20 +56,7 @@ NumToPersian = (function () {
             num = "0"+num;
         }
         //Explode to array
-        num = num.split("");
-        index = 0;
-        output= [];
-        for(i = 0;i<num.length;i++){
-            if(i >0 && i%3 === 0){
-                index++;
-            }
-            if(typeof output[index] !== "undefined"){
-                output[index]+= num[i];
-            }else{
-                output[index] = num[i];
-            }
-        }
-        return output;
+        return num.replace(/\d{3}(?=\d)/g, "$&*").split('*');
     }
 
     /**
