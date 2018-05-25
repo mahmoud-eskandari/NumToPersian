@@ -4,20 +4,29 @@ Convert numbers to Persian letters in  JavaScript
 
 ## تبدیل عدد به حروف فارسی در جاوا اسکریپت
 
-* No need to jQuery!
-* Tested and reliable
-* Easy to use
+* بدون نیاز به jQuery
+* سهولت در استفاده
+* توانایی پردازش اعداد تا 69 رقم | گوگول
+* پرفورمنس بالا
 
 just Call `NumToPersian` or use `toPersian()` Prototype.
 
-# Example
+# مثالها
 
 ```javascript
 <script>
-  console.log(NumToPersian(1250)+'[by function]');
-  console.log("1250".toPersian()+'[by prototype]');
+NumToPersian(1250); //output: یك هزار و دویست و پنجاه
+"2001".toPersian(); //output: دو هزار و یك
+(84000).toPersian(); //output: هشتاد و چهار هزار
 </script>
 ```
-
+```
+100000000056600000000444400000000065265632323000085555111056526223333
+```
+>>
+```
+یكصد گوگول و پنجاه و شش نانیلیارد و ششصد نانیلیون و چهارصد و چهل و چهار سپتیلیارد و چهارصد سپتیلیون و شصت و پنج کوانتینیارد و دویست و شصت و پنج کوینتیلیون و ششصد و سی و دو کادریلیارد و سیصد و بیست و سه کوآدریلیون و هشتاد و پنج تریلیون و پانصد و پنجاه و پنج بیلیارد و یكصد و یازده بیلیون و پنجاه و شش میلیارد و پانصد و بیست و شش میلیون و دویست و بیست و سه هزار و سیصد و سی و سه
+```
+#### این کتابخانه در ورژن فعلی از اعداد اعشاری پشتیبانی نمیکند
 CDN:
-[https://rawgit.com/mahmoud-eskandari/NumToPersian/master/num2persian.min.js]
+[https://cdn.rawgit.com/mahmoud-eskandari/NumToPersian/33bbd287/num2persian.min.js]
