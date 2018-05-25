@@ -29,4 +29,4 @@ NumToPersian(1250); //output: یك هزار و دویست و پنجاه
 ```
 #### این کتابخانه در ورژن فعلی از اعداد اعشاری پشتیبانی نمیکند
 CDN:
-[https://cdn.rawgit.com/mahmoud-eskandari/NumToPersian/33bbd287/num2persian.min.js]
+[https://cdn.rawgit.com/mahmoud-eskandari/NumToPersian/9a2273eb/num2persian.min.js]
