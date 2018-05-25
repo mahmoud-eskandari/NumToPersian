@@ -9,7 +9,7 @@ Convert numbers to Persian letters in  JavaScript
 * توانایی پردازش اعداد تا 66 رقم | دسیلیارد
 * پرفورمنس بالا
 
-just Call `NumToPersian` or use `toPersian()` Prototype.
+call `NumToPersian()` or use `.toPersian()` prototype.
 
 # مثالها
 
