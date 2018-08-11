@@ -14,17 +14,18 @@ call `NumToPersian()` or use `.toPersian()` prototype.
 # مثالها
 
 ```javascript
-<script>
+//Global function
 NumToPersian(1250); //output: یك هزار و دویست و پنجاه
+
+//String Prototype
 "2001".toPersian(); //output: دو هزار و یك
+
+//Number Prototype
 (84000).toPersian(); //output: هشتاد و چهار هزار
-</script>
 ```
 ```
 100000000000000000000000000000000000000000000000000000000000000001
-```
 >>
-```
 یكصد دسیلیارد و یك
 ```
 #### این کتابخانه در ورژن فعلی از اعداد اعشاری پشتیبانی نمیکند
