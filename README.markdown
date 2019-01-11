@@ -29,7 +29,9 @@ NumToPersian(1250); //output: یك هزار و دویست و پنجاه
 یكصد دسیلیارد و یك
 ```
 #### این کتابخانه در ورژن فعلی از اعداد اعشاری پشتیبانی نمیکند
+### توجه کنید برای اعداد بالای 16 رقم نباید از نوع داده اینتجر استفاده شود. زیرا جاوا اسکریپت ساپورت نمیکند و باید از نوع داده استرینگ استفاده کنید!
 CDN:
 [https://cdn.rawgit.com/mahmoud-eskandari/NumToPersian/2e66d7cf/num2persian.min.js]
+
 CDN for dev:
 [https://rawgit.com/mahmoud-eskandari/NumToPersian/master/num2persian.min.js]
