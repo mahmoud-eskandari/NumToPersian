@@ -1,5 +1,11 @@
 # NumToPersian
 
+## Installation
+
+```
+  npm install num2persian
+```
+
 Convert numbers to Persian letters in  JavaScript
 
 ## تبدیل عدد به حروف فارسی در جاوا اسکریپت
@@ -29,8 +35,6 @@ NumToPersian(1250); //output: یک هزار و دویست و پنجاه
 ```
 ##### این کتابخانه در ورژن فعلی از اعداد اعشاری پشتیبانی نمیکند
 #### توجه کنید برای اعداد بالای 16 رقم نباید از نوع داده اینتجر استفاده شود. زیرا جاوا اسکریپت ساپورت نمیکند و باید از نوع داده استرینگ استفاده کنید!
-CDN:
-[https://cdn.rawgit.com/mahmoud-eskandari/NumToPersian/2e66d7cf/num2persian.min.js]
 
-CDN for dev:
-[https://rawgit.com/mahmoud-eskandari/NumToPersian/master/num2persian.min.js]
+CDN:
+[https://cdn.jsdelivr.net/gh/mahmoud-eskandari/NumToPersian/dist/num2persian-min.js]
