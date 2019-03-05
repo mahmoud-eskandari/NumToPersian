@@ -2,10 +2,14 @@
 
 ## Installation
 
+### NPM
 ```
   npm install num2persian
 ```
-
+### Bower
+```
+ bower install num2persian
+ ```
 Convert numbers to Persian letters in  JavaScript
 
 ## تبدیل عدد به حروف فارسی در جاوا اسکریپت
