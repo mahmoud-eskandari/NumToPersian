@@ -1,3 +1,15 @@
+/**
+ * Name:Javascript Number To Persian Convertor.
+ * License: GPL-2.0
+ * Generated on 2019-03-05
+ * Author:Mahmoud Eskanadri.
+ * Copyright:2018 http://Webafrooz.com.
+ * version:3.0.0
+ * Email:info@webafrooz.com,sbs8@yahoo.com
+ * coded with ♥ in Webafrooz.
+ * big numbers refrence: https://fa.wikipedia.org/wiki/%D9%86%D8%A7%D9%85_%D8%A7%D8%B9%D8%AF%D8%A7%D8%AF_%D8%A8%D8%B2%D8%B1%DA%AF
+ */
+
 "use strict";
 
 /**
