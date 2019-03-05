@@ -112,3 +112,4 @@ String.prototype.toPersianLetter = function () {
 Number.prototype.toPersianLetter = function () {
   return Num2persian(parseInt(this).toString());
 };
+export default Num2persian
