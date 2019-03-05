@@ -10,6 +10,11 @@
 ```
  bower install num2persian
  ```
+ ## Usage
+ ```
+ import Num2persian from 'num2persian';
+ console.log(Num2persian(123));
+ ```
 Convert numbers to Persian letters in  JavaScript
 
 ## تبدیل عدد به حروف فارسی در جاوا اسکریپت
