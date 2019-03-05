@@ -1,4 +1,4 @@
-
+"use strict"
 /**
  *
  * @type {string}
@@ -85,7 +85,7 @@ const ThreeNumbersToLetter = (num) => {
   return out.join(Delimiter);
 };
 
-const Num2Persian = (num) => {
+const Num2persian = (num) => {
   // return Zero
   if (parseInt(num, 0) === 0) {
     return Zero;
@@ -107,4 +107,10 @@ const Num2Persian = (num) => {
   }
   return Output.join(Delimiter);
 };
-export default Num2Persian;
+String.prototype.toPersianLetter = function () {
+  return Num2persian(this);
+};
+Number.prototype.toPersianLetter = function () {
+  return Num2persian(parseInt(this).toString());
+};
+export default Num2persian;
