@@ -19,7 +19,7 @@ NumToPersian = (function () {
      *
      * @type {string}
      */
-    spliter = " و ";
+    Delimiter = " و ";
 
     /**
      *
@@ -32,7 +32,7 @@ NumToPersian = (function () {
      * @type {*[]}
      */
     Letters = [
-        ["", "یك", "دو", "سه", "چهار", "پنج", "شش", "هفت", "هشت", "نه"],
+        ["", "یک", "دو", "سه", "چهار", "پنج", "شش", "هفت", "هشت", "نه"],
         ["ده", "یازده", "دوازده", "سیزده", "چهارده", "پانزده", "شانزده", "هفده", "هجده", "نوزده","بیست"],
         ["","","بیست", "سی", "چهل", "پنجاه", "شصت", "هفتاد", "هشتاد", "نود"],
         ["", "یكصد", "دویست", "سیصد", "چهارصد", "پانصد", "ششصد", "هفتصد", "هشتصد", "نهصد"],
@@ -42,7 +42,7 @@ NumToPersian = (function () {
     ];
 
     /**
-     * Clear number and split to 3th sections
+     * Clear number and split to 3 sections
      * @param {*} num 
      */
     function PrepareNumber(num){
@@ -68,24 +68,24 @@ NumToPersian = (function () {
         if(parseInt(num) === 0){
             return "";
         }
-        parsedInt = parseInt(num);
-        if(parsedInt < 10){
-            return Letters[0][parsedInt];
+        num = parseInt(num);
+        if(num < 10){
+            return Letters[0][num];
         }
-        if(parsedInt <= 20){
-            return Letters[1][parsedInt-10];
+        if(num <= 20){
+            return Letters[1][num-10];
         }
-        if(parsedInt < 100){
-             one = parsedInt%10;
-             ten = (parsedInt-one)/10;
+        if(num < 100){
+             one = num%10;
+             ten = (num-one)/10;
              if(one > 0){
-                return Letters[2][ten] + spliter + Letters[0][one];
+                return Letters[2][ten] + Delimiter + Letters[0][one];
              }
              return Letters[2][ten];
         }
-        one = parsedInt%10;
-        hundreds = (parsedInt-parsedInt%100)/100;
-        ten = (parsedInt-((hundreds*100)+one))/10;
+        one = num%10;
+        hundreds = (num-one)/100;
+        ten = (num-((hundreds*100)+one))/10;
         out = [Letters[3][hundreds]];
         SecendPart = ((ten*10)+one);
         if(SecendPart > 0){
@@ -100,7 +100,7 @@ NumToPersian = (function () {
                 }
             }
         }
-        return out.join(spliter);
+        return out.join(Delimiter);
     }
 
     /**
@@ -127,7 +127,7 @@ NumToPersian = (function () {
                 funcout.push(converted+SectionTitle);
             }
         }
-        return funcout.join(spliter);
+        return funcout.join(Delimiter);
     };
 })();
 String.prototype.toPersian = function () {
