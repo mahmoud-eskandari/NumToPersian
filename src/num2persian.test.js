@@ -6,6 +6,11 @@ import ThreeNumbersToLetter from './num2persian';
 test('Three Numbers To Letter 123', () => {
   expect(ThreeNumbersToLetter(123)).toBe('یکصد و بیست و سه');
 });
+
+test('Decimal Test  2.3345', () => {
+  expect(Num2persian('2.3345')).toBe('دو ممیز سه هزار و سیصد و چهل و پنج ده‌هزارم');
+});
+
 test('Three Numbers To Letter 10', () => {
   expect(ThreeNumbersToLetter(10)).toBe('ده');
 });
