@@ -1,10 +1,10 @@
 /**
  * Name:Javascript Number To Persian Convertor.
  * License: GPL-2.0
- * Generated on 2019-03-05
+ * Generated on 2019-06-07
  * Author:Mahmoud Eskanadri.
  * Copyright:2018 http://Webafrooz.com.
- * version:3.0.0
+ * version:3.0.3
  * Email:info@webafrooz.com,sbs8@yahoo.com
  * coded with ♥ in Webafrooz.
  * big numbers refrence: https://fa.wikipedia.org/wiki/%D9%86%D8%A7%D9%85_%D8%A7%D8%B9%D8%AF%D8%A7%D8%AF_%D8%A8%D8%B2%D8%B1%DA%AF
@@ -29,6 +29,12 @@ var Zero = 'صفر';
  */
 
 var Letters = [['', 'یک', 'دو', 'سه', 'چهار', 'پنج', 'شش', 'هفت', 'هشت', 'نه'], ['ده', 'یازده', 'دوازده', 'سیزده', 'چهارده', 'پانزده', 'شانزده', 'هفده', 'هجده', 'نوزده', 'بیست'], ['', '', 'بیست', 'سی', 'چهل', 'پنجاه', 'شصت', 'هفتاد', 'هشتاد', 'نود'], ['', 'یکصد', 'دویست', 'سیصد', 'چهارصد', 'پانصد', 'ششصد', 'هفتصد', 'هشتصد', 'نهصد'], ['', ' هزار', ' میلیون', ' میلیارد', ' بیلیون', ' بیلیارد', ' تریلیون', ' تریلیارد', 'کوآدریلیون', ' کادریلیارد', ' کوینتیلیون', ' کوانتینیارد', ' سکستیلیون', ' سکستیلیارد', ' سپتیلیون', 'سپتیلیارد', ' اکتیلیون', ' اکتیلیارد', ' نانیلیون', ' نانیلیارد', ' دسیلیون', ' دسیلیارد']];
+/**
+ * Decimal suffixes for decimal part
+ * @type {string[]}
+ */
+
+var DecimalSuffixes = ['', 'دهم', 'صدم', 'هزارم', 'ده‌هزارم', 'صد‌هزارم', 'میلیونوم', 'ده‌میلیونوم', 'صدمیلیونوم', 'میلیاردم', 'ده‌میلیاردم', 'صد‌‌میلیاردم'];
 /**
  * Clear number and split to 3 sections
  * @param {*} num
@@ -103,19 +109,82 @@ var ThreeNumbersToLetter = function ThreeNumbersToLetter(num) {
 
   return out.join(Delimiter);
 };
+/**
+ * Remove end zero of decimal part
+ * @param input
+ * @returns {string}
+ * @constructor
+ */
 
-var Num2persian = function Num2persian(num) {
-  // return Zero
-  if (parseInt(num, 0) === 0) {
-    return Zero;
+
+var ClearEndZero = function ClearEndZero(input) {
+  var ReversedInput = input.split('').reverse();
+
+  for (var i = 0; i < ReversedInput.length; i++) {
+    if (ReversedInput[i] !== '0') {
+      return ReversedInput.reverse().join('');
+    }
+
+    i--;
+    ReversedInput.shift();
   }
 
-  if (num.length > 66) {
+  return '';
+};
+/**
+ * Convert Decimal part
+ * @param DecimalPart
+ * @returns {string}
+ * @constructor
+ */
+
+
+var ConvertDecimalPart = function ConvertDecimalPart(DecimalPart) {
+  // Clear right zero
+  DecimalPart = ClearEndZero(DecimalPart);
+
+  if (DecimalPart === '') {
+    return '';
+  }
+
+  if (DecimalPart.length > 11) {
+    DecimalPart = DecimalPart.substr(0, 11);
+  }
+
+  return ' ممیز ' + Num2persian(DecimalPart) + ' ' + DecimalSuffixes[DecimalPart.length];
+};
+/**
+ * Main function
+ * @param InputNumber
+ * @returns {string}
+ * @constructor
+ */
+
+
+var Num2persian = function Num2persian(InputNumber) {
+  // Clear Non digits
+  InputNumber = InputNumber.replace(/\D+(?<![.])/g, ''); // return Zero
+
+  if (isNaN(parseFloat(InputNumber))) {
+    return Zero;
+  } // Declare Parts
+
+
+  var DecimalPart = '';
+  var IntegerPart = InputNumber;
+  var PointIndex = InputNumber.indexOf('.'); // Check for float numbers form string and split Int/Dec
+
+  if (PointIndex > -1) {
+    IntegerPart = InputNumber.substring(0, PointIndex);
+    DecimalPart = InputNumber.substring(PointIndex + 1, InputNumber.length);
+  }
+
+  if (IntegerPart.length > 66) {
     return 'خارج از محدوده';
   } // Split to sections
 
 
-  var SpitedNumber = PrepareNumber(num); // Fetch Sections and convert
+  var SpitedNumber = PrepareNumber(IntegerPart); // Fetch Sections and convert
 
   var Output = [];
   var SplitLength = SpitedNumber.length;
@@ -127,9 +196,14 @@ var Num2persian = function Num2persian(num) {
     if (converted !== '') {
       Output.push(converted + SectionTitle);
     }
+  } // Convert Decimal part
+
+
+  if (DecimalPart.length > 0) {
+    DecimalPart = ConvertDecimalPart(DecimalPart);
   }
 
-  return Output.join(Delimiter);
+  return Output.join(Delimiter) + DecimalPart;
 };
 
 String.prototype.toPersianLetter = function () {
@@ -137,5 +211,5 @@ String.prototype.toPersianLetter = function () {
 };
 
 Number.prototype.toPersianLetter = function () {
-  return Num2persian(parseInt(this).toString());
+  return Num2persian(parseFloat(this).toString());
 };

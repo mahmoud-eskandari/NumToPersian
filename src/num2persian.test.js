@@ -7,6 +7,10 @@ test('Three Numbers To Letter 123', () => {
   expect(ThreeNumbersToLetter(123)).toBe('یکصد و بیست و سه');
 });
 
+test('Extra Chars  2.3345', () => {
+  expect(Num2persian('%2.33a45')).toBe('دو ممیز سه هزار و سیصد و چهل و پنج ده‌هزارم');
+});
+
 test('Decimal Test  2.3345', () => {
   expect(Num2persian('2.3345')).toBe('دو ممیز سه هزار و سیصد و چهل و پنج ده‌هزارم');
 });

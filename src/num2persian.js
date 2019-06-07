@@ -147,11 +147,15 @@ const ConvertDecimalPart = (DecimalPart) => {
  * @constructor
  */
 const Num2persian = (InputNumber) => {
+    // Clear Non digits
+    InputNumber = InputNumber.replace(/\D+(?<![.])/g,'');
+
     // return Zero
     if (isNaN(parseFloat(InputNumber))) {
         return Zero;
     }
 
+    // Declare Parts
     let DecimalPart = '';
     let IntegerPart = InputNumber;
     let PointIndex = InputNumber.indexOf('.');
