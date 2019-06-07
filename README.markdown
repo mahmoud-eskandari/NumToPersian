@@ -2,11 +2,11 @@
 
 ## Installation
 
-### NPM
+### npm
 ```
   npm install num2persian
 ```
-### Bower
+### bower
 ```
  bower install num2persian
  ```
@@ -15,15 +15,9 @@
  import Num2persian from 'num2persian';
  console.log(Num2persian(123));
  ```
-Convert numbers to Persian letters in  JavaScript
+## Convert numbers/digits to Persian letters in  JavaScript
 
-## تبدیل عدد به حروف فارسی در جاوا اسکریپت
-
-* سهولت در استفاده
-* توانایی پردازش اعداد تا 66 رقم | دسیلیارد
-* پرفورمنس بالا
-
-call `Num2persian()` or use `.toPersianLetter()` prototype.
+Just call `Num2persian()` or use `.toPersianLetter()` prototype.
 
 #  Example
 
@@ -34,15 +28,20 @@ Num2persian(1250); //output: یک هزار و دویست و پنجاه
 //String Prototype
 "2001".toPersianLetter(); //output: دو هزار و یک
 
+//Non-Digits
+"%20s01".toPersianLetter(); //output: دو هزار و یک
+"2,001".toPersianLetter(); //output: دو هزار و یک
+
 //Number Prototype
 (84000).toPersianLetter(); //output: هشتاد و چهار هزار
+
+//Float
+(12.450).toPersianLetter(); //output: دوازده ممیز چهل و پنج صدم
 ```
-```
-100000000000000000000000000000000000000000000000000000000000000001
->>
-یكصد دسیلیارد و یک
-```
-##### این کتابخانه در ورژن فعلی از اعداد اعشاری پشتیبانی نمیکند
+
+## تبدیل عدد به حروف فارسی در جاوا اسکریپت
+* توانایی پردازش اعداد تا 66 رقم عدد صحیح و 11 رقم اعشار | دسیلیارد
+
 #### برای استفاده از اعداد بزرگ از نوع داده استرینگ استفاده کنید.
 
 CDN:
