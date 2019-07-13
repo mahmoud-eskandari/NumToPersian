@@ -132,7 +132,7 @@ const convertDecimalPart = (decimalPart) => {
  */
 const Num2persian = (input) => {
   // Clear Non digits
-  input = input.replace(/[^0-9.]/g, '');
+  input = input.toString().replace(/[^0-9.]/g, '');
 
   // return zero
   if (isNaN(parseFloat(input))) {

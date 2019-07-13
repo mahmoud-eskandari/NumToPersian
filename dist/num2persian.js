@@ -1,10 +1,10 @@
 /**
  * Name:Javascript Number To Persian Convertor.
  * License: GPL-2.0
- * Generated on 2019-06-07
+ * Generated on 2019-07-13
  * Author:Mahmoud Eskanadri.
  * Copyright:2018 http://Webafrooz.com.
- * version:3.1.1
+ * version:3.1.2
  * Email:info@webafrooz.com,sbs8@yahoo.com
  * coded with ♥ in Webafrooz.
  * big numbers refrence: https://fa.wikipedia.org/wiki/%D9%86%D8%A7%D9%85_%D8%A7%D8%B9%D8%AF%D8%A7%D8%AF_%D8%A8%D8%B2%D8%B1%DA%AF
@@ -141,7 +141,7 @@ var convertDecimalPart = function convertDecimalPart(decimalPart) {
 
 var Num2persian = function Num2persian(input) {
   // Clear Non digits
-  input = input.replace(/[^0-9.]/g, ''); // return zero
+  input = input.toString().replace(/[^0-9.]/g, ''); // return zero
 
   if (isNaN(parseFloat(input))) {
     return zero;
