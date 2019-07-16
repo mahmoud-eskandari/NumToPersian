@@ -1,6 +1,6 @@
 {
   "name": "num2persian",
-  "version": "3.1.2",
+  "version": "3.1.3",
   "description": "Number to Persian letter",
   "main": "src/num2persian.js",
   "repository": {
