@@ -37,6 +37,10 @@ Num2persian(1250); //output: یک هزار و دویست و پنجاه
 
 //Float
 (12.450).toPersianLetter(); //output: دوازده ممیز چهل و پنج صدم
+
+//Negative numbers
+(-11).toPersianLetter(); //output: منفی یازده
+
 ```
 
 ## تبدیل عدد به حروف فارسی در جاوا اسکریپت
