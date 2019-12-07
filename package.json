@@ -1,6 +1,6 @@
 {
   "name": "num2persian",
-  "version": "3.1.3",
+  "version": "3.2.0",
   "description": "Number to Persian letter",
   "main": "src/num2persian.js",
   "repository": {
@@ -23,12 +23,15 @@
     "node": ">=6.9.0",
     "npm": ">= 3"
   },
+  "scripts": {
+    "build" : "gulp"
+  },
   "devDependencies": {
     "@babel/core": "^7.3.4",
     "@babel/preset-env": "^7.3.4",
     "babel-cli": "^6.26.0",
-    "babel-core": "^6.26.3",
-    "babel-preset-es2015": "^6.24.1",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-preset-es2015": "^7.0.0-beta.0",
     "eslint": "^5.3.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-loader": "^1.9.0",
@@ -36,10 +39,11 @@
     "eslint-plugin-import": "^2.17.3",
     "eslint-plugin-jsx-a11y": "^6.2.1",
     "eslint-plugin-react": "^7.13.0",
-    "gulp": "^4.0.0",
+    "gulp": "^4.0.2",
     "gulp-babel": "^8.0.0",
     "gulp-header-comment": "^0.4.0",
     "gulp-minify": "^3.1.0",
+    "gulp-replace": "^1.0.0",
     "jest": "^23.6.0"
   },
   "babel": {

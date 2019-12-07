@@ -1,10 +1,10 @@
 /**
  * Name:Javascript Number To Persian Convertor.
  * License: GPL-2.0
- * Generated on 2019-07-13
+ * Generated on 2019-12-07
  * Author:Mahmoud Eskanadri.
  * Copyright:2018 http://Webafrooz.com.
- * version:3.1.2
+ * version:3.2.0
  * Email:info@webafrooz.com,sbs8@yahoo.com
  * coded with ♥ in Webafrooz.
  * big numbers refrence: https://fa.wikipedia.org/wiki/%D9%86%D8%A7%D9%85_%D8%A7%D8%B9%D8%AF%D8%A7%D8%AF_%D8%A8%D8%B2%D8%B1%DA%AF
@@ -25,6 +25,12 @@ var delimiter = ' و ';
 var zero = 'صفر';
 /**
  *
+ * @type {string}
+ */
+
+var negative = 'منفی ';
+/**
+ *
  * @type {*[]}
  */
 
@@ -40,7 +46,7 @@ var decimalSuffixes = ['', 'دهم', 'صدم', 'هزارم', 'ده‌هزارم'
  * @param {*} num
  */
 
-var prepareNumber = function prepareNumber(num) {
+var prepareNumber = function prepareNumber (num) {
   var Out = num;
 
   if (typeof Out === 'number') {
@@ -59,7 +65,7 @@ var prepareNumber = function prepareNumber(num) {
   return Out.replace(/\d{3}(?=\d)/g, '$&*').split('*');
 };
 
-var threeNumbersToLetter = function threeNumbersToLetter(num) {
+var threeNumbersToLetter = function threeNumbersToLetter (num) {
   // return zero
   if (parseInt(num, 0) === 0) {
     return '';
@@ -117,7 +123,7 @@ var threeNumbersToLetter = function threeNumbersToLetter(num) {
  */
 
 
-var convertDecimalPart = function convertDecimalPart(decimalPart) {
+var convertDecimalPart = function convertDecimalPart (decimalPart) {
   // Clear right zero
   decimalPart = decimalPart.replace(/0*$/, "");
 
@@ -139,12 +145,25 @@ var convertDecimalPart = function convertDecimalPart(decimalPart) {
  */
 
 
-var Num2persian = function Num2persian(input) {
+var Num2persian = function Num2persian (input) {
   // Clear Non digits
-  input = input.toString().replace(/[^0-9.]/g, ''); // return zero
+  input = input.toString().replace(/[^0-9.-]/g, '');
+  var isNegative = false;
+  var floatParse = parseFloat(input); // return zero if this isn't a valid number
 
-  if (isNaN(parseFloat(input))) {
+  if (isNaN(floatParse)) {
     return zero;
+  } // check for zero
+
+
+  if (floatParse === 0) {
+    return zero;
+  } // set negative flag:true if the number is less than 0
+
+
+  if (floatParse < 0) {
+    isNegative = true;
+    input = input.replace(/-/g, '');
   } // Declare Parts
 
 
@@ -181,7 +200,7 @@ var Num2persian = function Num2persian(input) {
     decimalPart = convertDecimalPart(decimalPart);
   }
 
-  return Output.join(delimiter) + decimalPart;
+  return (isNegative ? negative : '') + Output.join(delimiter) + decimalPart;
 };
 
 String.prototype.toPersianLetter = function () {

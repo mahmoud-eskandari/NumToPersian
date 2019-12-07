@@ -12,6 +12,12 @@ const zero = 'صفر';
 
 /**
  *
+ * @type {string}
+ */
+const negative = 'منفی ';
+
+/**
+ *
  * @type {*[]}
  */
 const letters = [
@@ -132,11 +138,21 @@ const convertDecimalPart = (decimalPart) => {
  */
 const Num2persian = (input) => {
   // Clear Non digits
-  input = input.toString().replace(/[^0-9.]/g, '');
-
-  // return zero
-  if (isNaN(parseFloat(input))) {
+  input = input.toString().replace(/[^0-9.-]/g, '');
+  let isNegative = false;
+  const floatParse = parseFloat(input);
+  // return zero if this isn't a valid number
+  if (isNaN(floatParse)) {
     return zero;
+  }
+  // check for zero
+  if (floatParse === 0){
+    return zero;
+  }
+  // set negative flag:true if the number is less than 0
+  if (floatParse < 0){
+    isNegative = true;
+    input = input.replace(/-/g, '');
   }
 
   // Declare Parts
@@ -152,7 +168,7 @@ const Num2persian = (input) => {
   if (integerPart.length > 66) {
     return 'خارج از محدوده';
   }
-  
+
   // Split to sections
   const slicedNumber = prepareNumber(integerPart);
   // Fetch Sections and convert
@@ -171,7 +187,7 @@ const Num2persian = (input) => {
     decimalPart = convertDecimalPart(decimalPart);
   }
 
-  return Output.join(delimiter) + decimalPart;
+  return (isNegative?negative:'') + Output.join(delimiter) + decimalPart;
 };
 
 String.prototype.toPersianLetter = function () {

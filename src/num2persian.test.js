@@ -15,6 +15,10 @@ test('Decimal Test  2.3345', () => {
   expect(Num2persian('2.3345')).toBe('دو ممیز سه هزار و سیصد و چهل و پنج ده‌هزارم');
 });
 
+test('Negative test', () => {
+  expect(Num2persian('-11')).toBe('منفی یازده');
+});
+
 test('Three Numbers To Letter 10', () => {
   expect(ThreeNumbersToLetter(10)).toBe('ده');
 });
