@@ -10,3 +10,5 @@
 config.gypi
 CVS
 npm-debug.log
+./dist
+./demo
