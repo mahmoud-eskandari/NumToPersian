@@ -4,7 +4,7 @@
 
 ### npm
 ```
-  npm install num2persian
+  npm i num2persian
 ```
 ### bower
 ```
