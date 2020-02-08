@@ -48,7 +48,7 @@ Num2persian(1250); //output: یک هزار و دویست و پنجاه
 
 #### برای استفاده از اعداد بزرگ از نوع داده استرینگ استفاده کنید.
 
-[(CDN)](https://cdn.jsdelivr.net/gh/mahmoud-eskandari/NumToPersian/dist/num2persian-min.js) :
+## [(CDN)](https://cdn.jsdelivr.net/gh/mahmoud-eskandari/NumToPersian/dist/num2persian-min.js) :
 [https://cdn.jsdelivr.net/gh/mahmoud-eskandari/NumToPersian/dist/num2persian-min.js]
 
-[GIST](https://mahmoud-eskandari.github.io/NumToPersian/)
+## [Github Page](https://mahmoud-eskandari.github.io/NumToPersian/)
