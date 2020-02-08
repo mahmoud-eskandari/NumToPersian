@@ -10,7 +10,7 @@
 ```
  bower install num2persian
  ```
- ## Usage
+## Usage
  ```
  import Num2persian from 'num2persian';
  console.log(Num2persian(123));
@@ -44,9 +44,11 @@ Num2persian(1250); //output: یک هزار و دویست و پنجاه
 ```
 
 ## تبدیل عدد به حروف فارسی در جاوا اسکریپت
-* توانایی پردازش اعداد تا 66 رقم عدد صحیح و 11 رقم اعشار | دسیلیارد
+توانایی پردازش اعداد تا 66 رقم عدد صحیح و 11 رقم اعشار | دسیلیارد
 
 #### برای استفاده از اعداد بزرگ از نوع داده استرینگ استفاده کنید.
 
-CDN:
+[(CDN)](https://cdn.jsdelivr.net/gh/mahmoud-eskandari/NumToPersian/dist/num2persian-min.js) :
 [https://cdn.jsdelivr.net/gh/mahmoud-eskandari/NumToPersian/dist/num2persian-min.js]
+
+[GIST](https://mahmoud-eskandari.github.io/NumToPersian/)
