@@ -15,7 +15,7 @@
  import Num2persian from 'num2persian';
  console.log(Num2persian(123));
  ```
-## Convert numbers/digits to Persian letters in  JavaScript
+## Convert numbers/digits to Persian words in JavaScript
 
 Just call `Num2persian()` or use `.toPersianLetter()` prototype.
 
