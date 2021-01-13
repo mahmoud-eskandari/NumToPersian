@@ -186,14 +186,12 @@ var Num2persian = function Num2persian(input) {
   var slicedNumber = prepareNumber(integerPart); // Fetch Sections and convert
 
   var out = [];
-  var SplitLength = slicedNumber.length;
 
-  for (var i = 0; i < SplitLength; i += 1) {
-    var SectionTitle = letters[4][SplitLength - (i + 1)];
+  for (var i = 0; i < slicedNumber.length; i += 1) {
     var converted = tinyNumToWord(slicedNumber[i]);
 
     if (converted !== '') {
-      out.push(converted + SectionTitle);
+      out.push(converted + letters[4][slicedNumber.length - (i + 1)]);
     }
   } // Convert Decimal part
 
