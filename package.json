@@ -1,6 +1,6 @@
 {
   "name": "num2persian",
-  "version": "3.2.1",
+  "version": "3.2.2",
   "description": "Number to Persian letter",
   "main": "src/num2persian.js",
   "repository": {
@@ -24,7 +24,8 @@
     "npm": ">= 3"
   },
   "scripts": {
-    "build" : "gulp"
+    "build": "gulp",
+    "test": "jest"
   },
   "devDependencies": {
     "@babel/core": "^7.3.4",
@@ -41,10 +42,10 @@
     "eslint-plugin-react": "^7.13.0",
     "gulp": "^4.0.2",
     "gulp-babel": "^8.0.0",
-    "gulp-header-comment": "^0.4.0",
+    "gulp-header-comment": "^0.9.0",
     "gulp-minify": "^3.1.0",
     "gulp-replace": "^1.0.0",
-    "jest": "^23.6.0"
+    "jest": "^26.6.3"
   },
   "babel": {
     "presets": [
