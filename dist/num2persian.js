@@ -1,10 +1,10 @@
 /**
  * Name:Javascript Number To Persian Convertor.
  * License: GPL-2.0
- * Generated on 2020-04-13
+ * Generated on 2021-01-13
  * Author:Mahmoud Eskanadri.
  * Copyright:2018 http://Webafrooz.com.
- * version:3.2.1
+ * version:3.2.2
  * Email:info@webafrooz.com,sbs8@yahoo.com
  * coded with ♥ in Webafrooz.
  * big numbers refrence: https://fa.wikipedia.org/wiki/%D9%86%D8%A7%D9%85_%D8%A7%D8%B9%D8%AF%D8%A7%D8%AF_%D8%A8%D8%B2%D8%B1%DA%AF
@@ -47,25 +47,25 @@ var decimalSuffixes = ['', 'دهم', 'صدم', 'هزارم', 'ده‌هزارم'
  */
 
 var prepareNumber = function prepareNumber(num) {
-  var Out = num;
+  var out = num;
 
-  if (typeof Out === 'number') {
-    Out = Out.toString();
-  }
+  if (typeof out === 'number') {
+    out = out.toString();
+  } //make first part 3 chars
 
-  var NumberLength = Out.length % 3;
 
-  if (NumberLength === 1) {
-    Out = "00".concat(Out);
-  } else if (NumberLength === 2) {
-    Out = "0".concat(Out);
+  if (out.length % 3 === 1) {
+    out = "00".concat(out);
+  } else if (out.length % 3 === 2) {
+    out = "0".concat(out);
   } // Explode to array
 
 
-  return Out.replace(/\d{3}(?=\d)/g, '$&*').split('*');
-};
+  return out.replace(/\d{3}(?=\d)/g, '$&*').split('*');
+}; //tinyNumToWord convert 3tiny parts to word
 
-var threeNumbersToLetter = function threeNumbersToLetter(num) {
+
+var tinyNumToWord = function tinyNumToWord(num) {
   // return zero
   if (parseInt(num, 0) === 0) {
     return '';
@@ -97,19 +97,21 @@ var threeNumbersToLetter = function threeNumbersToLetter(num) {
   var hundreds = (parsedInt - parsedInt % 100) / 100;
   var ten = (parsedInt - (hundreds * 100 + one)) / 10;
   var out = [letters[3][hundreds]];
-  var SecondPart = ten * 10 + one;
+  var secondPart = ten * 10 + one;
 
-  if (SecondPart > 0) {
-    if (SecondPart < 10) {
-      out.push(letters[0][SecondPart]);
-    } else if (SecondPart <= 20) {
-      out.push(letters[1][SecondPart - 10]);
-    } else {
-      out.push(letters[2][ten]);
+  if (secondPart === 0) {
+    return out.join(delimiter);
+  }
 
-      if (one > 0) {
-        out.push(letters[0][one]);
-      }
+  if (secondPart < 10) {
+    out.push(letters[0][secondPart]);
+  } else if (secondPart <= 20) {
+    out.push(letters[1][secondPart - 10]);
+  } else {
+    out.push(letters[2][ten]);
+
+    if (one > 0) {
+      out.push(letters[0][one]);
     }
   }
 
@@ -183,15 +185,15 @@ var Num2persian = function Num2persian(input) {
 
   var slicedNumber = prepareNumber(integerPart); // Fetch Sections and convert
 
-  var Output = [];
+  var out = [];
   var SplitLength = slicedNumber.length;
 
   for (var i = 0; i < SplitLength; i += 1) {
     var SectionTitle = letters[4][SplitLength - (i + 1)];
-    var converted = threeNumbersToLetter(slicedNumber[i]);
+    var converted = tinyNumToWord(slicedNumber[i]);
 
     if (converted !== '') {
-      Output.push(converted + SectionTitle);
+      out.push(converted + SectionTitle);
     }
   } // Convert Decimal part
 
@@ -200,13 +202,23 @@ var Num2persian = function Num2persian(input) {
     decimalPart = convertDecimalPart(decimalPart);
   }
 
-  return (isNegative ? negative : '') + Output.join(delimiter) + decimalPart;
-};
+  return (isNegative ? negative : '') + out.join(delimiter) + decimalPart;
+}; //@depercated
+
 
 String.prototype.toPersianLetter = function () {
   return Num2persian(this);
-};
+}; //@depercated
+
 
 Number.prototype.toPersianLetter = function () {
+  return Num2persian(parseFloat(this).toString());
+};
+
+String.prototype.num2persian = function () {
+  return Num2persian(this);
+};
+
+Number.prototype.num2persian = function () {
   return Num2persian(parseFloat(this).toString());
 };

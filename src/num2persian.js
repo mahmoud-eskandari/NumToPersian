@@ -26,7 +26,7 @@ const letters = [
   ['', '', 'بیست', 'سی', 'چهل', 'پنجاه', 'شصت', 'هفتاد', 'هشتاد', 'نود'],
   ['', 'یکصد', 'دویست', 'سیصد', 'چهارصد', 'پانصد', 'ششصد', 'هفتصد', 'هشتصد', 'نهصد'],
   ['', ' هزار', ' میلیون', ' میلیارد', ' بیلیون', ' بیلیارد', ' تریلیون', ' تریلیارد',
-  ' کوآدریلیون', ' کادریلیارد', ' کوینتیلیون', ' کوانتینیارد', ' سکستیلیون', ' سکستیلیارد', ' سپتیلیون',
+    ' کوآدریلیون', ' کادریلیارد', ' کوینتیلیون', ' کوانتینیارد', ' سکستیلیون', ' سکستیلیارد', ' سپتیلیون',
     ' سپتیلیارد', ' اکتیلیون', ' اکتیلیارد', ' نانیلیون', ' نانیلیارد', ' دسیلیون', ' دسیلیارد'
   ],
 ];
@@ -55,22 +55,23 @@ const decimalSuffixes = [
  * @param {*} num
  */
 const prepareNumber = (num) => {
-  let Out = num;
-  if (typeof Out === 'number') {
-    Out = Out.toString();
+  let out = num;
+  if (typeof out === 'number') {
+    out = out.toString();
   }
-  const NumberLength = Out.length % 3;
-  if (NumberLength === 1) {
-    Out = `00${Out}`;
-  } else if (NumberLength === 2) {
-    Out = `0${Out}`;
+
+  //make first part 3 chars
+  if (out.length % 3 === 1) {
+    out = `00${out}`;
+  } else if (out.length % 3 === 2) {
+    out = `0${out}`;
   }
   // Explode to array
-  return Out.replace(/\d{3}(?=\d)/g, '$&*')
-    .split('*');
+  return out.replace(/\d{3}(?=\d)/g, '$&*').split('*');
 };
 
-const threeNumbersToLetter = (num) => {
+//tinyNumToWord convert 3tiny parts to word
+const tinyNumToWord = (num) => {
   // return zero
   if (parseInt(num, 0) === 0) {
     return '';
@@ -94,19 +95,23 @@ const threeNumbersToLetter = (num) => {
   const hundreds = (parsedInt - (parsedInt % 100)) / 100;
   const ten = (parsedInt - ((hundreds * 100) + one)) / 10;
   const out = [letters[3][hundreds]];
-  const SecondPart = ((ten * 10) + one);
-  if (SecondPart > 0) {
-    if (SecondPart < 10) {
-      out.push(letters[0][SecondPart]);
-    } else if (SecondPart <= 20) {
-      out.push(letters[1][SecondPart - 10]);
-    } else {
-      out.push(letters[2][ten]);
-      if (one > 0) {
-        out.push(letters[0][one]);
-      }
+  const secondPart = ((ten * 10) + one);
+
+  if (secondPart === 0) {
+    return out.join(delimiter);
+  }
+
+  if (secondPart < 10) {
+    out.push(letters[0][secondPart]);
+  } else if (secondPart <= 20) {
+    out.push(letters[1][secondPart - 10]);
+  } else {
+    out.push(letters[2][ten]);
+    if (one > 0) {
+      out.push(letters[0][one]);
     }
   }
+  
   return out.join(delimiter);
 };
 
@@ -173,13 +178,11 @@ const Num2persian = (input) => {
   // Split to sections
   const slicedNumber = prepareNumber(integerPart);
   // Fetch Sections and convert
-  const Output = [];
-  const SplitLength = slicedNumber.length;
-  for (let i = 0; i < SplitLength; i += 1) {
-    const SectionTitle = letters[4][SplitLength - (i + 1)];
-    const converted = threeNumbersToLetter(slicedNumber[i]);
+  const out = [];
+  for (let i = 0; i < slicedNumber.length; i += 1) {
+    const converted = tinyNumToWord(slicedNumber[i]);
     if (converted !== '') {
-      Output.push(converted + SectionTitle);
+      out.push(converted + letters[4][slicedNumber.length - (i + 1)]);
     }
   }
 
@@ -188,14 +191,24 @@ const Num2persian = (input) => {
     decimalPart = convertDecimalPart(decimalPart);
   }
 
-  return (isNegative?negative:'') + Output.join(delimiter) + decimalPart;
+  return (isNegative?negative:'') + out.join(delimiter) + decimalPart;
 };
 
+//@depercated
 String.prototype.toPersianLetter = function () {
   return Num2persian(this);
 };
 
+//@depercated
 Number.prototype.toPersianLetter = function () {
+  return Num2persian(parseFloat(this).toString());
+};
+
+String.prototype.num2persian = function () {
+  return Num2persian(this);
+};
+
+Number.prototype.num2persian = function () {
   return Num2persian(parseFloat(this).toString());
 };
 

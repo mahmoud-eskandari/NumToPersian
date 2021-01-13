@@ -1,10 +1,10 @@
 /* eslint no-use-before-define: 0 */  // --> OFF
 
 import Num2persian from './num2persian';
-import ThreeNumbersToLetter from './num2persian';
+import tinyNumToWord from './num2persian';
 
 test('Three Numbers To Letter 123', () => {
-  expect(ThreeNumbersToLetter(123)).toBe('یکصد و بیست و سه');
+  expect(tinyNumToWord(123)).toBe('یکصد و بیست و سه');
 });
 
 test('Extra Chars  2.3345', () => {
@@ -20,7 +20,7 @@ test('Negative test', () => {
 });
 
 test('Three Numbers To Letter 10', () => {
-  expect(ThreeNumbersToLetter(10)).toBe('ده');
+  expect(tinyNumToWord(10)).toBe('ده');
 });
 test('test 0', () => {
   expect(Num2persian(0)).toBe('صفر');

@@ -12,3 +12,5 @@ CVS
 npm-debug.log
 ./dist
 ./demo
+.vscode
+.idea
