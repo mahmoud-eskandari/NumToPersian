@@ -17,7 +17,7 @@
  ```
 ## Convert numbers/digits to Persian words in JavaScript
 
-Just call `Num2persian()` or use `.toPersianLetter()` prototype.
+Just call `Num2persian()` or use `.num2persian()` prototype.
 
 #  Example
 
@@ -26,20 +26,20 @@ Just call `Num2persian()` or use `.toPersianLetter()` prototype.
 Num2persian(1250); //output: یک هزار و دویست و پنجاه
 
 //String Prototype
-"2001".toPersianLetter(); //output: دو هزار و یک
+"2001".num2persian(); //output: دو هزار و یک
 
 //Non-Digits
-"%20s01".toPersianLetter(); //output: دو هزار و یک
-"2,001".toPersianLetter(); //output: دو هزار و یک
+"%20s01".num2persian(); //output: دو هزار و یک
+"2,001".num2persian(); //output: دو هزار و یک
 
 //Number Prototype
-(84000).toPersianLetter(); //output: هشتاد و چهار هزار
+(84000).num2persian(); //output: هشتاد و چهار هزار
 
 //Float
-(12.450).toPersianLetter(); //output: دوازده ممیز چهل و پنج صدم
+(12.450).num2persian(); //output: دوازده ممیز چهل و پنج صدم
 
 //Negative numbers
-(-11).toPersianLetter(); //output: منفی یازده
+(-11).num2persian(); //output: منفی یازده
 
 ```
 
