@@ -194,12 +194,12 @@ const Num2persian = (input) => {
   return (isNegative?negative:'') + out.join(delimiter) + decimalPart;
 };
 
-//@depercated
+//@deprecated
 String.prototype.toPersianLetter = function () {
   return Num2persian(this);
 };
 
-//@depercated
+//@deprecated
 Number.prototype.toPersianLetter = function () {
   return Num2persian(parseFloat(this).toString());
 };
