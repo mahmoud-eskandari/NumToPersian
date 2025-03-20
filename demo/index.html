@@ -1,67 +1,164 @@
 <!doctype html>
-<html lang="en">
+<html lang="fa">
 <head>
     <meta charset="UTF-8">
-
-    <title> تبدیل عدد به حروف در جاوا اسکریپت </title>
+    <title>تبدیل عدد به حروف در جاوا اسکریپت</title>
     <style>
         body {
-            font-family: Tahoma, arial,serif;
+            font-family: Tahoma, Arial, serif;
+            text-align: center;
+            direction: rtl;
+            background-color: #f2f2f2;
         }
 
         #container {
-            margin: 0 auto;
-            width: 360px;
-            direction: rtl;
+            margin: 20px auto;
+            width: 400px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background-color: #fff;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
         }
 
-        input {
-            float: left;
-            width: 166px;
-            padding: 5px;
-            font-family: Tahoma, arial,serif;
+        input, button {
+            width: 85%;
+            padding: 8px;
+            margin: 5px 0;
+            font-size: 16px;
         }
 
-        #demo_out2, #demo_out1 {
-            float: right;
-            direction: rtl;
-            color: #00baba;
-            padding: 9px;
+        button {
+            cursor: pointer;
+            background-color: #00baba;
+            color: white;
+            border: none;
+            border-radius: 4px;
+        }
+
+        #output {
+            margin-top: 15px;
+            padding: 10px;
+            color: #007777;
+            font-weight: bold;
+            background-color: #e6f7f7;
+            border-radius: 5px;
+            display: none;
+        }
+
+        .copy-btn, .clear-btn {
+            display: none;
+            margin-top: 5px;
+        }
+
+        .copy-btn {
+            background-color: #008CBA;
+        }
+
+        .clear-btn {
+            background-color: #d9534f;
+        }
+
+        .radio-group {
+            margin: 10px 0;
         }
     </style>
-    <!-- Created With ♥ By Mahmoud Eskandari - info@webafrooz.com-->
-    <script src="../dist/num2persian.js" type="text/javascript"></script>
+    <script src="../dist/num2persian.js"></script>
 </head>
 <body>
 <div id="container">
-    <!-- Demo 1 -->
-    <div>
-        <label for="demo1">با استفاده از تابع:</label>
-        <input id="demo1" type="number"
-               onchange="document.getElementById('demo_out1').innerHTML = Num2persian(this.value)"
-               placeholder="عددي در اين فيلد وارد کنيد">
+    <h2>تبدیل عدد به حروف</h2>
+    <input id="numberInput" type="number" placeholder="عدد را وارد کنید">
+    <div class="radio-group">
+        <label>
+            <input type="radio" name="currency" value="rial" checked> ریال
+        </label>
+        <label>
+            <input type="radio" name="currency" value="toman"> تومان
+        </label>
     </div>
-    <br>
-    <div id="demo_out1"></div>
-    <br>
-    <!-- Demo 2 -->
-        <div>
-            <label for="demo2">با استفاده از پروتوتایپ:</label>
-            <input id="demo2" type="number" placeholder="عددي در اين فيلد وارد کنيد">
-        </div>
-    <br>
-    <div id="demo_out2"></div>
-    <script>
-        onload = function () {
-            var e = document.getElementById('demo2');
-            e.oninput = myHandler;
-            e.onpropertychange = e.oninput; // for IE8
-            function myHandler() {
-                document.getElementById('demo_out2').innerHTML = e.value.toPersianLetter();
-            }
-        };
-    </script>
-    <br>
+    <button id="convertBtn">تبدیل</button>
+    <div id="output"></div>
+    <button id="copyBtn" class="copy-btn">کپی متن</button>
+    <button id="clearBtn" class="clear-btn">پاک کردن</button>
 </div>
+
+<script>
+    // بازگردانی مقدار ذخیره‌شده در هنگام بارگذاری صفحه
+    window.onload = function () {
+        let savedNumber = localStorage.getItem("lastNumber");
+        if (savedNumber) {
+            document.getElementById("numberInput").value = savedNumber;
+            convertNumber();
+        }
+    };
+
+    document.getElementById("convertBtn").addEventListener("click", convertNumber);
+
+    document.getElementById("numberInput").addEventListener("input", function () {
+        if (this.value.length > 15) {
+            this.value = this.value.slice(0, 15);
+        }
+        convertNumber();
+    });
+
+    document.getElementById("copyBtn").addEventListener("click", function () {
+        let text = document.getElementById("output").innerText.replace("نتیجه: ", "");
+        navigator.clipboard.writeText(text).then(() => {
+            alert("متن کپی شد!");
+        });
+    });
+
+    document.getElementById("clearBtn").addEventListener("click", function () {
+        document.getElementById("numberInput").value = "";
+        document.getElementById("output").style.display = "none";
+        document.getElementById("copyBtn").style.display = "none";
+        document.getElementById("clearBtn").style.display = "none";
+    });
+
+    document.querySelectorAll('input[name="currency"]').forEach((elem) => {
+        elem.addEventListener("change", convertNumber);
+    });
+
+    function convertNumber() {
+        let number = document.getElementById("numberInput").value;
+        let outputDiv = document.getElementById("output");
+        let copyBtn = document.getElementById("copyBtn");
+        let clearBtn = document.getElementById("clearBtn");
+
+        if (number === "") {
+            outputDiv.style.display = "none";
+            copyBtn.style.display = "none";
+            clearBtn.style.display = "none";
+            return;
+        }
+
+        number = parseFloat(number);
+        if (isNaN(number)) {
+            outputDiv.innerHTML = "عدد وارد شده معتبر نیست.";
+            outputDiv.style.color = "red";
+            outputDiv.style.display = "block";
+            copyBtn.style.display = "none";
+            return;
+        }
+
+        localStorage.setItem("lastNumber", number);
+
+        let convertedText = Num2persian(number);
+        let currency = document.querySelector('input[name="currency"]:checked').value;
+
+        if (currency === "toman") {
+            convertedText += " تومان";
+        } else {
+            convertedText += " ریال";
+        }
+
+        outputDiv.innerHTML = `نتیجه: ${convertedText}`;
+        outputDiv.style.color = "#007777";
+        outputDiv.style.display = "block";
+        copyBtn.style.display = "inline-block";
+        clearBtn.style.display = "inline-block";
+    }
+</script>
 </body>
 </html>
