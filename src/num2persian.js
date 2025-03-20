@@ -1,23 +1,19 @@
 /**
- *
  * @type {string}
  */
 const delimiter = ' و ';
 
 /**
- *
  * @type {string}
  */
 const zero = 'صفر';
 
 /**
- *
  * @type {string}
  */
 const negative = 'منفی ';
 
 /**
- *
  * @type {*[]}
  */
 const letters = [
@@ -60,7 +56,7 @@ const prepareNumber = (num) => {
     out = out.toString();
   }
 
-  //make first part 3 chars
+  // make first part 3 chars
   if (out.length % 3 === 1) {
     out = `00${out}`;
   } else if (out.length % 3 === 2) {
@@ -70,9 +66,38 @@ const prepareNumber = (num) => {
   return out.replace(/\d{3}(?=\d)/g, '$&*').split('*');
 };
 
+/**
+ * Convert a fractional part to word (e.g., 1/2 -> "نیم")
+ * @param fraction
+ * @returns {string}
+ */
+const convertFraction = (fraction) => {
+  const fractions = {
+    '1/2': 'نیم',
+    '1/3': 'یک سوم',
+    '2/3': 'دو سوم',
+    '1/4': 'یک چهارم',
+    '3/4': 'سه چهارم',
+    '1/5': 'یک پنجم',
+    '2/5': 'دو پنجم',
+    '3/5': 'سه پنجم',
+    '4/5': 'چهار پنجم',
+    '1/6': 'یک ششم',
+    '5/6': 'پنج ششم',
+    '1/7': 'یک هفتم',
+    '6/7': 'شش هفتم',
+    '1/8': 'یک هشتم',
+    '7/8': 'هفت هشتم',
+    '1/9': 'یک نهم',
+    '2/9': 'دو نهم',
+    // Add more fractions if necessary
+  };
+
+  return fractions[fraction] || fraction;
+};
+
 //tinyNumToWord convert 3tiny parts to word
 const tinyNumToWord = (num) => {
-  // return zero
   if (parseInt(num, 0) === 0) {
     return '';
   }
@@ -111,10 +136,9 @@ const tinyNumToWord = (num) => {
       out.push(letters[0][one]);
     }
   }
-  
+
   return out.join(delimiter);
 };
-
 
 /**
  * Convert Decimal part
@@ -143,19 +167,27 @@ const convertDecimalPart = (decimalPart) => {
  * @constructor
  */
 const Num2persian = (input) => {
+  // Check if input is a fraction
+  if (input.includes('/')) {
+    return convertFraction(input);
+  }
+
   // Clear Non digits
-  input = input.toString().replace(/[^0-9.-]/g, '');
+  input = input.toString().replace(/[^0-9.,-]/g, ''); // Added support for commas and periods
   let isNegative = false;
   const floatParse = parseFloat(input);
-  // return zero if this isn't a valid number
+
+  // Return zero if this isn't a valid number
   if (isNaN(floatParse)) {
     return zero;
   }
-  // check for zero
+
+  // Check for zero
   if (floatParse === 0){
     return zero;
   }
-  // set negative flag:true if the number is less than 0
+
+  // Set negative flag:true if the number is less than 0
   if (floatParse < 0){
     isNegative = true;
     input = input.replace(/-/g, '');
@@ -165,6 +197,15 @@ const Num2persian = (input) => {
   let decimalPart = '';
   let integerPart = input;
   let pointIndex = input.indexOf('.');
+  
+  // Support for comma as a decimal separator (European style)
+  if (pointIndex === -1) {
+    pointIndex = input.indexOf(',');
+    if (pointIndex > -1) {
+      input = input.replace(',', '.');
+    }
+  }
+
   // Check for float numbers form string and split Int/Dec
   if (pointIndex > -1) {
     integerPart = input.substring(0, pointIndex);
@@ -177,9 +218,10 @@ const Num2persian = (input) => {
 
   // Split to sections
   const slicedNumber = prepareNumber(integerPart);
+  
   // Fetch Sections and convert
   const out = [];
-  for (let i = 0; i < slicedNumber.length; i += 1) {
+  for (let i = 0; i < slicedNumber.length; i++) {
     const converted = tinyNumToWord(slicedNumber[i]);
     if (converted !== '') {
       out.push(converted + letters[4][slicedNumber.length - (i + 1)]);
@@ -191,7 +233,7 @@ const Num2persian = (input) => {
     decimalPart = convertDecimalPart(decimalPart);
   }
 
-  return (isNegative?negative:'') + out.join(delimiter) + decimalPart;
+  return (isNegative ? negative : '') + out.join(delimiter) + decimalPart;
 };
 
 //@deprecated
@@ -212,4 +254,4 @@ Number.prototype.num2persian = function () {
   return Num2persian(parseFloat(this).toString());
 };
 
-export default Num2persian
+export default Num2persian;
