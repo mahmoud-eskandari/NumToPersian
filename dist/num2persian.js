@@ -1,222 +1,158 @@
-/**
- * Name:Javascript Number To Persian Convertor.
- * License: GPL-2.0
- * Generated on 2021-01-13
- * Author:Mahmoud Eskanadri.
- * Copyright:2018 http://Webafrooz.com.
- * version:3.2.2
- * Email:info@webafrooz.com,sbs8@yahoo.com
- * coded with ♥ in Webafrooz.
- * big numbers refrence: https://fa.wikipedia.org/wiki/%D9%86%D8%A7%D9%85_%D8%A7%D8%B9%D8%AF%D8%A7%D8%AF_%D8%A8%D8%B2%D8%B1%DA%AF
- */
-
 "use strict";
 
-/**
- *
- * @type {string}
- */
-var delimiter = ' و ';
-/**
- *
- * @type {string}
- */
+// تعریف متغیرها
+const delimiter = ' و ';
+const zero = 'صفر';
+const negative = 'منفی ';
+const letters = [
+    ['', 'یک', 'دو', 'سه', 'چهار', 'پنج', 'شش', 'هفت', 'هشت', 'نه'],
+    ['ده', 'یازده', 'دوازده', 'سیزده', 'چهارده', 'پانزده', 'شانزده', 'هفده', 'هجده', 'نوزده', 'بیست'],
+    ['', '', 'بیست', 'سی', 'چهل', 'پنجاه', 'شصت', 'هفتاد', 'هشتاد', 'نود'],
+    ['', 'یکصد', 'دویست', 'سیصد', 'چهارصد', 'پانصد', 'ششصد', 'هفتصد', 'هشتصد', 'نهصد'],
+    ['', ' هزار', ' میلیون', ' میلیارد', ' تریلیون', ' کوآدریلیون', ' کوینتیلیون']
+];
+const decimalSuffixes = ['', 'دهم', 'صدم', 'هزارم', 'ده‌هزارم', 'صد‌هزارم', 'میلیونوم', 'میلیاردم'];
+const weekdays = ['شنبه', 'یکشنبه', 'دوشنبه', 'سه‌شنبه', 'چهارشنبه', 'پنجشنبه', 'جمعه'];
 
-var zero = 'صفر';
-/**
- *
- * @type {string}
- */
+// افزودن کاما به اعداد برای خوانایی بهتر
+const addThousandSeparator = (num) => num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 
-var negative = 'منفی ';
-/**
- *
- * @type {*[]}
- */
-
-var letters = [['', 'یک', 'دو', 'سه', 'چهار', 'پنج', 'شش', 'هفت', 'هشت', 'نه'], ['ده', 'یازده', 'دوازده', 'سیزده', 'چهارده', 'پانزده', 'شانزده', 'هفده', 'هجده', 'نوزده', 'بیست'], ['', '', 'بیست', 'سی', 'چهل', 'پنجاه', 'شصت', 'هفتاد', 'هشتاد', 'نود'], ['', 'یکصد', 'دویست', 'سیصد', 'چهارصد', 'پانصد', 'ششصد', 'هفتصد', 'هشتصد', 'نهصد'], ['', ' هزار', ' میلیون', ' میلیارد', ' بیلیون', ' بیلیارد', ' تریلیون', ' تریلیارد', ' کوآدریلیون', ' کادریلیارد', ' کوینتیلیون', ' کوانتینیارد', ' سکستیلیون', ' سکستیلیارد', ' سپتیلیون', ' سپتیلیارد', ' اکتیلیون', ' اکتیلیارد', ' نانیلیون', ' نانیلیارد', ' دسیلیون', ' دسیلیارد']];
-/**
- * Decimal suffixes for decimal part
- * @type {string[]}
- */
-
-var decimalSuffixes = ['', 'دهم', 'صدم', 'هزارم', 'ده‌هزارم', 'صد‌هزارم', 'میلیونوم', 'ده‌میلیونوم', 'صدمیلیونوم', 'میلیاردم', 'ده‌میلیاردم', 'صد‌‌میلیاردم'];
-/**
- * Clear number and split to 3 sections
- * @param {*} num
- */
-
-var prepareNumber = function prepareNumber(num) {
-  var out = num;
-
-  if (typeof out === 'number') {
-    out = out.toString();
-  } //make first part 3 chars
-
-
-  if (out.length % 3 === 1) {
-    out = "00".concat(out);
-  } else if (out.length % 3 === 2) {
-    out = "0".concat(out);
-  } // Explode to array
-
-
-  return out.replace(/\d{3}(?=\d)/g, '$&*').split('*');
-}; //tinyNumToWord convert 3tiny parts to word
-
-
-var tinyNumToWord = function tinyNumToWord(num) {
-  // return zero
-  if (parseInt(num, 0) === 0) {
-    return '';
-  }
-
-  var parsedInt = parseInt(num, 0);
-
-  if (parsedInt < 10) {
-    return letters[0][parsedInt];
-  }
-
-  if (parsedInt <= 20) {
-    return letters[1][parsedInt - 10];
-  }
-
-  if (parsedInt < 100) {
-    var _one = parsedInt % 10;
-
-    var _ten = (parsedInt - _one) / 10;
-
-    if (_one > 0) {
-      return letters[2][_ten] + delimiter + letters[0][_one];
+// آماده‌سازی عدد برای پردازش
+const prepareNumber = (num) => {
+    let out = num.toString();
+    while (out.length % 3 !== 0) {
+        out = '0' + out;
     }
-
-    return letters[2][_ten];
-  }
-
-  var one = parsedInt % 10;
-  var hundreds = (parsedInt - parsedInt % 100) / 100;
-  var ten = (parsedInt - (hundreds * 100 + one)) / 10;
-  var out = [letters[3][hundreds]];
-  var secondPart = ten * 10 + one;
-
-  if (secondPart === 0) {
-    return out.join(delimiter);
-  }
-
-  if (secondPart < 10) {
-    out.push(letters[0][secondPart]);
-  } else if (secondPart <= 20) {
-    out.push(letters[1][secondPart - 10]);
-  } else {
-    out.push(letters[2][ten]);
-
-    if (one > 0) {
-      out.push(letters[0][one]);
-    }
-  }
-
-  return out.join(delimiter);
-};
-/**
- * Convert Decimal part
- * @param decimalPart
- * @returns {string}
- * @constructor
- */
-
-
-var convertDecimalPart = function convertDecimalPart(decimalPart) {
-  // Clear right zero
-  decimalPart = decimalPart.replace(/0*$/, "");
-
-  if (decimalPart === '') {
-    return '';
-  }
-
-  if (decimalPart.length > 11) {
-    decimalPart = decimalPart.substr(0, 11);
-  }
-
-  return ' ممیز ' + Num2persian(decimalPart) + ' ' + decimalSuffixes[decimalPart.length];
-};
-/**
- * Main function
- * @param input
- * @returns {string}
- * @constructor
- */
-
-
-var Num2persian = function Num2persian(input) {
-  // Clear Non digits
-  input = input.toString().replace(/[^0-9.-]/g, '');
-  var isNegative = false;
-  var floatParse = parseFloat(input); // return zero if this isn't a valid number
-
-  if (isNaN(floatParse)) {
-    return zero;
-  } // check for zero
-
-
-  if (floatParse === 0) {
-    return zero;
-  } // set negative flag:true if the number is less than 0
-
-
-  if (floatParse < 0) {
-    isNegative = true;
-    input = input.replace(/-/g, '');
-  } // Declare Parts
-
-
-  var decimalPart = '';
-  var integerPart = input;
-  var pointIndex = input.indexOf('.'); // Check for float numbers form string and split Int/Dec
-
-  if (pointIndex > -1) {
-    integerPart = input.substring(0, pointIndex);
-    decimalPart = input.substring(pointIndex + 1, input.length);
-  }
-
-  if (integerPart.length > 66) {
-    return 'خارج از محدوده';
-  } // Split to sections
-
-
-  var slicedNumber = prepareNumber(integerPart); // Fetch Sections and convert
-
-  var out = [];
-
-  for (var i = 0; i < slicedNumber.length; i += 1) {
-    var converted = tinyNumToWord(slicedNumber[i]);
-
-    if (converted !== '') {
-      out.push(converted + letters[4][slicedNumber.length - (i + 1)]);
-    }
-  } // Convert Decimal part
-
-
-  if (decimalPart.length > 0) {
-    decimalPart = convertDecimalPart(decimalPart);
-  }
-
-  return (isNegative ? negative : '') + out.join(delimiter) + decimalPart;
-}; //@depercated
-
-
-String.prototype.toPersianLetter = function () {
-  return Num2persian(this);
-}; //@depercated
-
-
-Number.prototype.toPersianLetter = function () {
-  return Num2persian(parseFloat(this).toString());
+    return out.match(/.{1,3}/g);
 };
 
+// تبدیل عدد سه‌رقمی به حروف
+const tinyNumToWord = (num) => {
+    let n = parseInt(num, 10);
+    if (n === 0) return '';
+    if (n < 10) return letters[0][n];
+    if (n < 20) return letters[1][n - 10];
+
+    let one = n % 10;
+    let ten = Math.floor(n / 10) % 10;
+    let hundred = Math.floor(n / 100);
+
+    let words = [];
+    if (hundred > 0) words.push(letters[3][hundred]);
+    if (ten >= 2) words.push(letters[2][ten]);
+    if (one > 0) words.push(letters[0][one]);
+
+    return words.join(delimiter);
+};
+
+// تبدیل بخش اعشاری
+const convertDecimalPart = (decimalPart) => {
+    decimalPart = decimalPart.replace(/0+$/, '');
+    if (!decimalPart) return '';
+
+    let length = Math.min(decimalPart.length, decimalSuffixes.length - 1);
+    return ' ممیز ' + Num2persian(decimalPart) + ' ' + decimalSuffixes[length];
+};
+
+// تبدیل اعداد کسری (مثلاً "۳/۴" به "سه چهارم")
+const convertFraction = (fraction) => {
+    let [num, denom] = fraction.split('/');
+    if (!num || !denom || isNaN(num) || isNaN(denom)) return 'عدد نامعتبر';
+    return Num2persian(num) + ' ' + Num2persian(denom) + 'م';
+};
+
+// تبدیل اعداد به حروف فارسی
+const Num2persian = (input) => {
+    input = input.toString().replace(/[^0-9./-]/g, '');
+    if (input.includes('/')) return convertFraction(input);
+
+    if (isNaN(parseFloat(input))) return 'عدد نامعتبر';
+
+    let isNegative = input.startsWith('-');
+    if (isNegative) input = input.replace(/-/g, '');
+
+    let [integerPart, decimalPart] = input.split('.');
+    if (!integerPart) integerPart = '0';
+
+    let sections = prepareNumber(integerPart);
+    let words = sections.map((section, index) => {
+        let word = tinyNumToWord(section);
+        return word ? word + letters[4][sections.length - 1 - index] : '';
+    }).filter(Boolean);
+
+    let decimalWords = decimalPart ? convertDecimalPart(decimalPart) : '';
+    let result = (isNegative ? negative : '') + words.join(delimiter) + decimalWords;
+
+    return result || zero;
+};
+
+// تبدیل اعداد به تومان یا ریال
+const convertToCurrency = (num, type = 'تومان') => {
+    let words = Num2persian(num);
+    return words + ' ' + type;
+};
+
+// نمایش عدد به صورت خلاصه (مثلاً "۱.۲ میلیون")
+const Num2persianShort = (input) => {
+    let num = parseFloat(input);
+    if (isNaN(num)) return 'عدد نامعتبر';
+
+    let absNum = Math.abs(num);
+    let suffixIndex = 0;
+
+    while (absNum >= 1000 && suffixIndex < letters[4].length - 1) {
+        absNum /= 1000;
+        suffixIndex++;
+    }
+
+    return (num < 0 ? negative : '') + absNum.toFixed(1) + letters[4][suffixIndex];
+};
+
+// تبدیل تاریخ شمسی به نوشتار فارسی با نام روز هفته
+const persianDateToWords = (date) => {
+    let parts = date.split('/'); // مثال: "1403/02/15"
+    if (parts.length !== 3) return 'تاریخ نامعتبر';
+
+    let [year, month, day] = parts.map(Number);
+    if (isNaN(year) || isNaN(month) || isNaN(day)) return 'تاریخ نامعتبر';
+
+    let weekday = weekdays[new Date(year, month - 1, day).getDay()];
+    const months = ['فروردین', 'اردیبهشت', 'خرداد', 'تیر', 'مرداد', 'شهریور', 'مهر', 'آبان', 'آذر', 'دی', 'بهمن', 'اسفند'];
+
+    return `${weekday}، سال ${Num2persian(year)}، ${Num2persian(day)}م ${months[month - 1]}`;
+};
+
+// تبدیل محدوده اعداد به نوشتار
+const convertRange = (range) => {
+    let [start, end] = range.split('-').map(Number);
+    if (isNaN(start) || isNaN(end)) return 'محدوده نامعتبر';
+    return Num2persian(start) + ' تا ' + Num2persian(end);
+};
+
+// تبدیل اعداد انگلیسی به فارسی
+const convertToPersianDigits = (num) => num.toString().replace(/\d/g, (d) => '۰۱۲۳۴۵۶۷۸۹'[d]);
+
+// افزودن متدهای جدید به رشته‌ها و اعداد
 String.prototype.num2persian = function () {
-  return Num2persian(this);
+    return Num2persian(this);
 };
 
 Number.prototype.num2persian = function () {
-  return Num2persian(parseFloat(this).toString());
+    return Num2persian(this.toString());
+};
+
+String.prototype.num2persianShort = function () {
+    return Num2persianShort(this);
+};
+
+Number.prototype.num2persianShort = function () {
+    return Num2persianShort(this.toString());
+};
+
+String.prototype.persianDateToWords = function () {
+    return persianDateToWords(this);
+};
+
+String.prototype.convertToPersianDigits = function () {
+    return convertToPersianDigits(this);
 };
