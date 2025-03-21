@@ -232,4 +232,58 @@ Number.prototype.num2persian = function(this: number): string {
   return num2persian(this.toString());
 };
 
+/**
+ * Helper function to convert an English number to Persian Number
+ * @param input - Number or String Like: 123
+ * @returns The Persian numbers Like: ۱۲۳
+ */
+export function enToFaNum(value: string | string): string {
+  value = String(value)
+  const englishNumbers = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', ','],
+    persianNumbers = ['۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹', '۰', '،']
+
+  for (let i = 0; i < 11; i++) {
+    value = value.replace(new RegExp(englishNumbers[i], 'g'), persianNumbers[i])
+  }
+  return value
+}
+
+/**
+ * Helper function to convert a Persian number to English number
+ * @param input - Number or String Like: ۱۲۳
+ * @returns The Persian numbers Like: 123
+ */
+export function faToEnNum(value: string): string {
+  const englishNumbers = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', ','],
+    persianNumbers = ['۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹', '۰', '،']
+
+  for (let i = 0; i < 11; i++) {
+    value = value.replace(new RegExp(persianNumbers[i], 'g'), englishNumbers[i])
+  }
+  return value
+}
+
+/**
+ * Helper function to convert an English number to Persian Number with comma delimited, Money forma
+ * @param input - Number or String Like: 123000
+ * @returns The Persian numbers Like: ۱۲۳،۰۰۰
+*/
+export function moneyFormat(value: string | number): string {
+  value = enToFaNum(String(value))
+  if (value.length <= 3) {
+    return value
+  }
+
+  let out = ''
+  let cursor = 0
+  for (let i = value.length - 1; i >= 0; i--) {
+    out = value[i] + (cursor > 0 && cursor % 3 === 0 && cursor !== value.length ? '،' : '') + out
+    cursor++
+  }
+
+  return out
+}
+
+
+
 export default num2persian;

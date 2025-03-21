@@ -1,54 +1,89 @@
 # NumToPersian
 
-## Installation
+Persian Number to Words Converter
+Description:
 
-### npm
-```
-  npm i num2persian
-```
-### bower
-```
- bower install num2persian
- ```
-## Usage
- ```
- import Num2persian from 'num2persian';
- console.log(Num2persian(123));
- ```
-## Convert numbers/digits to Persian words in JavaScript
+The Persian Number to Words Converter is a lightweight and versatile library designed to convert numerical values into their Persian (Farsi) word equivalents. Whether you're working with integers, decimals, or large numbers, this library provides accurate and human-readable Persian representations of numbers.
 
-Just call `Num2persian()` or use `.num2persian()` prototype.
+### Key Features:
+* Comprehensive Number Support :
+Converts both positive and negative integers.
+Handles decimal numbers with precision, including the correct placement of "ممیز" (decimal point) and appropriate suffixes like "دهم", "صدم", and "هزارم".
+Supports large numbers up to 66 digits, including terms like "هزار", "میلیون", "میلیارد", "تریلیون", and beyond.
+* Human-Readable Output:
+Generates natural Persian phrases using proper grammar and formatting.
+Ensures culturally accurate representation of Persian numerals, adhering to Persian language conventions.
+* Edge Case Handling:
+Gracefully handles edge cases like zero (صفر), invalid inputs, and very large numbers exceeding the supported range (with a fallback message: "خارج از محدوده").
+Automatically removes trailing zeros in decimal parts for cleaner output.
+* Extensibility:
+Extends native String and Number prototypes with a .num2persian() method, allowing seamless integration into your codebase.
+Written in TypeScript, ensuring type safety and compatibility with modern JavaScript/TypeScript projects.
+Lightweight and Dependency-Free :
+Minimalistic design with no external dependencies, making it easy to integrate into any project.
+Optimized for performance without compromising functionality.
+* Use Cases:
+Financial Applications : Convert monetary values into Persian words for invoices, receipts, or financial reports.
+* Localization: Enhance Persian-language applications by displaying numbers in a more user-friendly format.
+* Educational Tools: Teach Persian numeral systems or assist in language learning applications.
+General Utilities : Provide Persian word representations for numbers in any context where readability is essential.
 
-#  Example
-
+Example Usage:
 ```javascript
-//Global function
-Num2persian(1250); //output: یک هزار و دویست و پنجاه
+import num2persian from 'num2persian';
 
-//String Prototype
-"2001".num2persian(); //output: دو هزار و یک
+// Convert integers
+console.log(num2persian(123)); // Output: "صد و بیست و سه"
 
-//Non-Digits
-"%20s01".num2persian(); //output: دو هزار و یک
-"2,001".num2persian(); //output: دو هزار و یک
+// Convert decimals
+console.log(num2persian(123.45)); // Output: "صد و بیست و سه و ممیز چهل و پنج صدم"
 
-//Number Prototype
-(84000).num2persian(); //output: هشتاد و چهار هزار
+// Convert large numbers
+console.log(num2persian(1000000)); // Output: "یک میلیون"
 
-//Float
-(12.450).num2persian(); //output: دوازده ممیز چهل و پنج صدم
+// Handle negative numbers
+console.log(num2persian(-456)); // Output: "منفی چهارصد و پنجاه و شش"
 
-//Negative numbers
-(-11).num2persian(); //output: منفی یازده
+// Prototype extension
+console.log((789).num2persian()); // Output: "هفتصد و هشتاد و نه"
 
 ```
+
+
+Helper functions:
+```javascript
+import {moneyFormat, faToEnNum, enToFaNum}  from './num2persian';
+ console.log(moneyFormat(123000)); // output: ۱۲۳،۰۰۰
+ console.log(enToFaNum(123000)); // output: ۱۲۳۰۰۰
+ console.log(faToEnNum('۱۲۳۰۰۰')); // output: 123000
+```
+
+Installation:
+Install the library via npm:
+
+```bash
+npm i num2persian
+```
+
+Testing:
+The library includes a robust test suite written with Jest to ensure correctness across various scenarios. Run the tests using:
+
+```bash
+npm test
+```
+
+License:
+This library is released under the MIT License , making it free to use, modify, and distribute for both personal and commercial purposes.
+
+Whether you're building a Persian-language application or need a reliable way to display numbers in Persian words, the Persian Number to Words Converter is the perfect tool for the job. Its simplicity, accuracy, and extensibility make it an invaluable addition to any project requiring Persian numeral conversions.
+
 
 ## تبدیل عدد به حروف فارسی در جاوا اسکریپت
 توانایی پردازش اعداد تا 66 رقم عدد صحیح و 11 رقم اعشار | دسیلیارد
 
 #### برای استفاده از اعداد بزرگ از نوع داده استرینگ استفاده کنید.
 
-## [(CDN)](https://cdn.jsdelivr.net/gh/mahmoud-eskandari/NumToPersian/dist/num2persian-min.js) :
-[https://cdn.jsdelivr.net/gh/mahmoud-eskandari/NumToPersian/dist/num2persian-min.js]
+## [(CDN)](https://cdn.jsdelivr.net/gh/mahmoud-eskandari/NumToPersian/dist/num2persian.min.js) :
+[https://cdn.jsdelivr.net/gh/mahmoud-eskandari/NumToPersian/dist/num2persian.min.js]
 
 ## [Github Page](https://mahmoud-eskandari.github.io/NumToPersian/)

@@ -1,10 +1,29 @@
 
 import num2persian  from './num2persian';
+import {moneyFormat, faToEnNum, enToFaNum}  from './num2persian';
+
+describe('moneyFormat', () => {
+  it('should format persian money', () => {
+    expect(moneyFormat(123000)).toBe('۱۲۳،۰۰۰');
+    expect(moneyFormat("۱۲۳۰۰۰")).toBe('۱۲۳،۰۰۰');
+  });
+});
+
+describe('faToEnNum && enToFaNum', () => {
+  it('should convert Persian to English number', () => {
+    expect(faToEnNum("۴۵۰")).toBe('450');
+  });
+
+  it('should convert English to Persian number', () => {
+    expect(enToFaNum("450")).toBe('۴۵۰');
+  });
+});
 
 describe('num2persian', () => {
   it('should convert zero correctly', () => {
     expect(num2persian(0)).toBe('صفر');
     expect(num2persian('0')).toBe('صفر');
+    expect(num2persian('')).toBe('صفر');
   });
 
   it('should convert small integers correctly', () => {
