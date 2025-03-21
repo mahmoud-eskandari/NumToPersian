@@ -1,6 +1,6 @@
 
 import num2persian  from './num2persian';
-import {moneyFormat, faToEnNum, enToFaNum}  from './num2persian';
+import {moneyFormat, fa2en, en2fa}  from './num2persian';
 
 describe('moneyFormat', () => {
   it('should format persian money', () => {
@@ -9,13 +9,13 @@ describe('moneyFormat', () => {
   });
 });
 
-describe('faToEnNum && enToFaNum', () => {
+describe('fa2en && en2fa', () => {
   it('should convert Persian to English number', () => {
-    expect(faToEnNum("۴۵۰")).toBe('450');
+    expect(fa2en("۴۵۰")).toBe('450');
   });
 
   it('should convert English to Persian number', () => {
-    expect(enToFaNum("450")).toBe('۴۵۰');
+    expect(en2fa("450")).toBe('۴۵۰');
   });
 });
 

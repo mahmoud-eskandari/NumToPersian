@@ -8,10 +8,9 @@ let content = fs.readFileSync(filePath, 'utf8');
 // Remove the export lines
 content = content.replace('Object.defineProperty(exports, "__esModule", { value: true });', '');
 content = content.replace('exports.default = num2persian;', '');
-content = content.replace('exports.enToFaNum = enToFaNum;', '');
-content = content.replace('exports.faToEnNum = faToEnNum;', '');
+content = content.replace('exports.en2fa = en2fa;', '');
+content = content.replace('exports.fa2en = fa2en;', '');
 content = content.replace('exports.moneyFormat = moneyFormat;', '');
-content = content.replace('exports.NumFormat = NumFormat;', '');
 
 // Write back to file
 fs.writeFileSync(filePath, content);

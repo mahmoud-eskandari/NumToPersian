@@ -3,7 +3,6 @@
 
 
 
-
 /**
  * Delimiter used between parts of the Persian number words
  */
@@ -196,7 +195,7 @@ Number.prototype.num2persian = function () {
  * @param input - Number or String Like: 123
  * @returns The Persian numbers Like: ۱۲۳
  */
-function enToFaNum(value) {
+function en2fa(value) {
     value = String(value);
     var englishNumbers = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', ','], persianNumbers = ['۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹', '۰', '،'];
     for (var i = 0; i < 11; i++) {
@@ -209,7 +208,7 @@ function enToFaNum(value) {
  * @param input - Number or String Like: ۱۲۳
  * @returns The Persian numbers Like: 123
  */
-function faToEnNum(value) {
+function fa2en(value) {
     var englishNumbers = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', ','], persianNumbers = ['۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹', '۰', '،'];
     for (var i = 0; i < 11; i++) {
         value = value.replace(new RegExp(persianNumbers[i], 'g'), englishNumbers[i]);
@@ -220,20 +219,16 @@ function faToEnNum(value) {
  * Helper function to convert an English number to Persian Number with comma delimited, Money forma
  * @param input - Number or String Like: 123000
  * @returns The Persian numbers Like: ۱۲۳،۰۰۰
- */
+*/
 function moneyFormat(value) {
-    value = enToFaNum(NumFormat(value));
-    return value;
-}
-function NumFormat(value) {
-    value = String(value);
+    value = en2fa(String(value));
     if (value.length <= 3) {
         return value;
     }
     var out = '';
     var cursor = 0;
     for (var i = value.length - 1; i >= 0; i--) {
-        out = value[i] + (cursor > 0 && cursor % 3 === 0 && cursor !== value.length ? ',' : '') + out;
+        out = value[i] + (cursor > 0 && cursor % 3 === 0 && cursor !== value.length ? '،' : '') + out;
         cursor++;
     }
     return out;

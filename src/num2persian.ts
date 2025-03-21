@@ -237,7 +237,7 @@ Number.prototype.num2persian = function(this: number): string {
  * @param input - Number or String Like: 123
  * @returns The Persian numbers Like: ۱۲۳
  */
-export function enToFaNum(value: string | string): string {
+export function en2fa(value: string | string): string {
   value = String(value)
   const englishNumbers = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', ','],
     persianNumbers = ['۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹', '۰', '،']
@@ -253,7 +253,7 @@ export function enToFaNum(value: string | string): string {
  * @param input - Number or String Like: ۱۲۳
  * @returns The Persian numbers Like: 123
  */
-export function faToEnNum(value: string): string {
+export function fa2en(value: string): string {
   const englishNumbers = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', ','],
     persianNumbers = ['۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹', '۰', '،']
 
@@ -269,7 +269,7 @@ export function faToEnNum(value: string): string {
  * @returns The Persian numbers Like: ۱۲۳،۰۰۰
 */
 export function moneyFormat(value: string | number): string {
-  value = enToFaNum(String(value))
+  value = en2fa(String(value))
   if (value.length <= 3) {
     return value
   }
