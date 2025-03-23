@@ -1,7 +1,6 @@
 # NumToPersian
 
-Persian Number to Words Converter
-Description:
+Persian Number to Words Converter:
 
 The Persian Number to Words Converter is a lightweight and versatile library designed to convert numerical values into their Persian (Farsi) word equivalents. Whether you're working with integers, decimals, or large numbers, this library provides accurate and human-readable Persian representations of numbers.
 
