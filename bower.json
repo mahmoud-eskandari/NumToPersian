@@ -1,7 +1,7 @@
 {
   "name": "num2persian",
   "description": "Number to Persian letter",
-  "main": "dist/num2persian.min.js",
+  "main": "dist/num2persian.js",
   "authors": [
     "Mahmoud Eskandari"
   ],
