@@ -52,7 +52,7 @@ console.log((789).num2persian()); // Output: "هفتصد و هشتاد و نه"
 
 Helper functions:
 ```javascript
-import {moneyFormat, fa2en, en2fa}  from './num2persian';
+import {moneyFormat, fa2en, en2fa}  from 'num2persian';
  console.log(moneyFormat(123000)); // output: ۱۲۳،۰۰۰
  console.log(en2fa(123000)); // output: ۱۲۳۰۰۰
  console.log(fa2en('۱۲۳۰۰۰')); // output: 123000
