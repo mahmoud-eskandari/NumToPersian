@@ -6,7 +6,7 @@ Description:
 The Persian Number to Words Converter is a lightweight and versatile library designed to convert numerical values into their Persian (Farsi) word equivalents. Whether you're working with integers, decimals, or large numbers, this library provides accurate and human-readable Persian representations of numbers.
 
 ### Key Features:
-* Comprehensive Number Support :
+* Comprehensive Number Support:
 Converts both positive and negative integers.
 Handles decimal numbers with precision, including the correct placement of "ممیز" (decimal point) and appropriate suffixes like "دهم", "صدم", and "هزارم".
 Supports large numbers up to 66 digits, including terms like "هزار", "میلیون", "میلیارد", "تریلیون", and beyond.
@@ -17,16 +17,13 @@ Ensures culturally accurate representation of Persian numerals, adhering to Pers
 Gracefully handles edge cases like zero (صفر), invalid inputs, and very large numbers exceeding the supported range (with a fallback message: "خارج از محدوده").
 Automatically removes trailing zeros in decimal parts for cleaner output.
 * Extensibility:
-Extends native String and Number prototypes with a .num2persian() method, allowing seamless integration into your codebase.
+Extends native String and Number prototypes with a `.num2persian()` method, allowing seamless integration into your codebase.
 Written in TypeScript, ensuring type safety and compatibility with modern JavaScript/TypeScript projects.
-Lightweight and Dependency-Free :
+
+* Lightweight and Dependency-Free:
 Minimalistic design with no external dependencies, making it easy to integrate into any project.
 Optimized for performance without compromising functionality.
-* Use Cases:
-Financial Applications : Convert monetary values into Persian words for invoices, receipts, or financial reports.
-* Localization: Enhance Persian-language applications by displaying numbers in a more user-friendly format.
-* Educational Tools: Teach Persian numeral systems or assist in language learning applications.
-General Utilities : Provide Persian word representations for numbers in any context where readability is essential.
+
 
 Example Usage:
 ```javascript
