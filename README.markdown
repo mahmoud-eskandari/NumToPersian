@@ -33,10 +33,10 @@ Example Usage:
 import num2persian from 'num2persian';
 
 // Convert integers
-console.log(num2persian(123)); // Output: "صد و بیست و سه"
+console.log(num2persian(123)); // Output: "یکصد و بیست و سه"
 
 // Convert decimals
-console.log(num2persian(123.45)); // Output: "صد و بیست و سه و ممیز چهل و پنج صدم"
+console.log(num2persian(123.45)); // Output: "یکصد و بیست و سه ممیز چهل و پنج صدم"
 
 // Convert large numbers
 console.log(num2persian(1000000)); // Output: "یک میلیون"
