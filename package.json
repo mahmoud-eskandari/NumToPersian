@@ -1,6 +1,6 @@
 {
   "name": "num2persian",
-  "version": "4.0.0",
+  "version": "4.1.0",
   "description": "Number to Persian letter",
   "main": "src/num2persian.ts",
   "repository": {

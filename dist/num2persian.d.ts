@@ -1,5 +1,12 @@
 /**
- * Main function to convert a number to Persian words
+ * A function for convert a number to mixed Persian words
+ * It's a wrapper to main convert function with Persian words only setting
+ * @param input - The number to convert (as string or number)
+ * @returns The Persian nums & word representation
+ */
+export declare function num2mixed(input: string | number): string;
+/**
+ * A wrapper to main convert function with Persian words only setting
  * @param input - The number to convert (as string or number)
  * @returns The Persian word representation
  */

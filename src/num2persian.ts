@@ -142,7 +142,7 @@ const convertDecimalPart = (decimalPart: string): string => {
  * @param input - The number to convert (as string or number)
  * @returns The Persian word representation
  */
-const num2persian = (input: string | number): string => {
+const convert = (input: string | number, isMixed: boolean): string => {
   // Clear non-digits
   const cleanInput = input.toString().replace(/[^0-9.-]/g, '');
   let isNegative = false;
@@ -187,7 +187,12 @@ const num2persian = (input: string | number): string => {
   // Fetch sections and convert
   const out: string[] = [];
   for (let i = 0; i < slicedNumber.length; i += 1) {
-    const converted = tinyNumToWord(slicedNumber[i]);
+    let converted = ""
+    if(isMixed){
+      converted = en2fa(slicedNumber[i]);
+    }else{
+      converted = tinyNumToWord(slicedNumber[i]);
+    }
     if (converted !== '') {
       out.push(converted + letters[4][slicedNumber.length - (i + 1)]);
     }
@@ -204,6 +209,26 @@ const num2persian = (input: string | number): string => {
   }
 
   return (isNegative ? negative : '') + out.join(delimiter) + decimalWords;
+};
+
+
+/**
+ * A function for convert a number to mixed Persian words
+ * It's a wrapper to main convert function with Persian words only setting
+ * @param input - The number to convert (as string or number)
+ * @returns The Persian nums & word representation
+ */
+export function num2mixed(input: string | number): string {
+  return convert(input, true)
+};
+
+/**
+ * A wrapper to main convert function with Persian words only setting
+ * @param input - The number to convert (as string or number)
+ * @returns The Persian word representation
+ */
+const num2persian = (input: string | number): string => {
+  return convert(input, false)
 };
 
 // Type declaration merging for adding methods to native prototypes

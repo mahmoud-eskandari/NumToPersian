@@ -10,6 +10,7 @@ content = content.replace('Object.defineProperty(exports, "__esModule", { value:
 content = content.replace('exports.default = num2persian;', '');
 content = content.replace('exports.en2fa = en2fa;', '');
 content = content.replace('exports.fa2en = fa2en;', '');
+content = content.replace('exports.num2mixed = num2mixed;', '');
 content = content.replace('exports.moneyFormat = moneyFormat;', '');
 
 // Write back to file

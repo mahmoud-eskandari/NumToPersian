@@ -1,11 +1,17 @@
 
-import num2persian  from './num2persian';
-import {moneyFormat, fa2en, en2fa}  from './num2persian';
+import num2persian from './num2persian';
+import {moneyFormat, fa2en, en2fa, num2mixed} from './num2persian';
 
 describe('moneyFormat', () => {
   it('should format persian money', () => {
     expect(moneyFormat(123000)).toBe('۱۲۳،۰۰۰');
     expect(moneyFormat("۱۲۳۰۰۰")).toBe('۱۲۳،۰۰۰');
+  });
+});
+
+describe('Mixed numbers', () => {
+  it('should format persian money', () => {
+    expect(num2mixed(123400)).toBe('۱۲۳ هزار و ۴۰۰');
   });
 });
 

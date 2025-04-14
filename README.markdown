@@ -46,6 +46,16 @@ console.log((789).num2persian()); // Output: "هفتصد و هشتاد و نه"
 ```
 
 
+Mixed numbers and letters:
+```javascript
+// اعداد به صورت کاراکتر عددی و واحدهای اندازه گیری با حروف
+import { num2mixed }  from 'num2persian';
+ console.log(num2mixed(123400)); // output: ۱۲۳
+ // هزار
+ // و
+ //  ۴۰۰ 
+```
+
 Helper functions:
 ```javascript
 import {moneyFormat, fa2en, en2fa}  from 'num2persian';

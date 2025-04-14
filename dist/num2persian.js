@@ -3,6 +3,7 @@
 
 
 
+
 /**
  * Delimiter used between parts of the Persian number words
  */
@@ -130,7 +131,7 @@ var convertDecimalPart = function (decimalPart) {
  * @param input - The number to convert (as string or number)
  * @returns The Persian word representation
  */
-var num2persian = function (input) {
+var convert = function (input, isMixed) {
     // Clear non-digits
     var cleanInput = input.toString().replace(/[^0-9.-]/g, '');
     var isNegative = false;
@@ -168,7 +169,13 @@ var num2persian = function (input) {
     // Fetch sections and convert
     var out = [];
     for (var i = 0; i < slicedNumber.length; i += 1) {
-        var converted = tinyNumToWord(slicedNumber[i]);
+        var converted = "";
+        if (isMixed) {
+            converted = en2fa(slicedNumber[i]);
+        }
+        else {
+            converted = tinyNumToWord(slicedNumber[i]);
+        }
         if (converted !== '') {
             out.push(converted + letters[4][slicedNumber.length - (i + 1)]);
         }
@@ -182,6 +189,24 @@ var num2persian = function (input) {
         decimalWords = convertDecimalPart(decimalPart);
     }
     return (isNegative ? negative : '') + out.join(delimiter) + decimalWords;
+};
+/**
+ * A function for convert a number to mixed Persian words
+ * It's a wrapper to main convert function with Persian words only setting
+ * @param input - The number to convert (as string or number)
+ * @returns The Persian nums & word representation
+ */
+function num2mixed(input) {
+    return convert(input, true);
+}
+;
+/**
+ * A wrapper to main convert function with Persian words only setting
+ * @param input - The number to convert (as string or number)
+ * @returns The Persian word representation
+ */
+var num2persian = function (input) {
+    return convert(input, false);
 };
 // Add methods to native prototypes with proper type safety
 String.prototype.num2persian = function () {
