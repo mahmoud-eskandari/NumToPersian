@@ -169,9 +169,12 @@ var convert = function (input, isMixed) {
     // Fetch sections and convert
     var out = [];
     for (var i = 0; i < slicedNumber.length; i += 1) {
+        if (Number(slicedNumber[i]) === 0) {
+            continue;
+        }
         var converted = "";
         if (isMixed) {
-            converted = en2fa(slicedNumber[i]);
+            converted = en2fa(String(Number(slicedNumber[i])));
         }
         else {
             converted = tinyNumToWord(slicedNumber[i]);

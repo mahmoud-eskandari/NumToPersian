@@ -10,8 +10,17 @@ describe('moneyFormat', () => {
 });
 
 describe('Mixed numbers', () => {
-  it('should format persian money', () => {
+  it('should format mixed numbers and unit words', () => {
     expect(num2mixed(123400)).toBe('۱۲۳ هزار و ۴۰۰');
+  });
+  it('should format mixed numbers and unit words without right zero', () => {
+    expect(num2mixed(1000000)).toBe('۱ میلیون');
+  });
+  it('should format negative mixed numbers and unit words without right zero', () => {
+    expect(num2mixed(-1000000)).toBe('منفی ۱ میلیون');
+  });
+  it('should format negative mixed numbers and unit words without right zero', () => {
+    expect(num2mixed(-1000005)).toBe('منفی ۱ میلیون و ۵');
   });
 });
 

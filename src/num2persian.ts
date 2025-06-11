@@ -187,9 +187,12 @@ const convert = (input: string | number, isMixed: boolean): string => {
   // Fetch sections and convert
   const out: string[] = [];
   for (let i = 0; i < slicedNumber.length; i += 1) {
+    if(Number(slicedNumber[i]) === 0){
+      continue
+    }
     let converted = ""
     if(isMixed){
-      converted = en2fa(slicedNumber[i]);
+      converted = en2fa(String(Number(slicedNumber[i])));
     }else{
       converted = tinyNumToWord(slicedNumber[i]);
     }
