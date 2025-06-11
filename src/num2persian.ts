@@ -25,7 +25,7 @@ const letters: string[][] = [
     ' کوآدریلیون', ' کادریلیارد', ' کوینتیلیون', ' کوانتینیارد', ' سکستیلیون', ' سکستیلیارد', ' سپتیلیون',
     ' سپتیلیارد', ' اکتیلیون', ' اکتیلیارد', ' نانیلیون', ' نانیلیارد', ' دسیلیون', ' دسیلیارد'
   ],
-];
+] as string[][];
 
 /**
  * Decimal suffixes for decimal part
@@ -43,7 +43,7 @@ const decimalSuffixes: string[] = [
   'میلیاردم',
   'ده‌میلیاردم',
   'صد‌‌میلیاردم'
-];
+] as string[];
 
 /**
  * Clear number and split to 3-digit sections
