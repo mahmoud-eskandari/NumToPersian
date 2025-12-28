@@ -92,4 +92,16 @@ Whether you're building a Persian-language application or need a reliable way to
 ## [(CDN)](https://cdn.jsdelivr.net/gh/mahmoud-eskandari/NumToPersian/dist/num2persian.min.js) :
 [https://cdn.jsdelivr.net/gh/mahmoud-eskandari/NumToPersian/dist/num2persian.min.js]
 
+## Browser usage via CDN
+```html
+<head>
+  <script src="https://cdn.jsdelivr.net/gh/mahmoud-eskandari/NumToPersian/dist/num2persian.min.js" ></script>
+</head>
+<body>
+  <script>
+   alert("4000".num2persian())
+   alert(num2persian("4000"))
+  </script>
+</body>
+```
 ## [Github Page](https://mahmoud-eskandari.github.io/NumToPersian/)
