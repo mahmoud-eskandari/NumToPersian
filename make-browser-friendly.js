@@ -3,7 +3,11 @@ const { minify } = require('terser');
 
 // Read the file
 const filePath = './dist/num2persian.js';
+const filePathModule = './dist/num2persian.module.js';
 let content = fs.readFileSync(filePath, 'utf8');
+
+// copy es module compatible ./dist/num2persian.module.js
+fs.writeFileSync(filePathModule, content);
 
 // Remove the export lines
 content = content.replace('Object.defineProperty(exports, "__esModule", { value: true });', '');
@@ -16,6 +20,25 @@ content = content.replace('exports.moneyFormat = moneyFormat;', '');
 // Write back to file
 fs.writeFileSync(filePath, content);
 console.log('Export statements removed successfully!');
+
+// Create minified module version
+async function createMinifiedModule() {
+  try {
+    let moduleContent = fs.readFileSync(filePathModule, 'utf8');
+    const result = await minify(moduleContent, {
+      compress: {
+        drop_console: false,
+        passes: 2
+      },
+      mangle: true
+    });
+    
+    fs.writeFileSync('./dist/num2persian.module.min.js', result.code);
+    console.log('Minified version created: num2persian.module.min.js');
+  } catch (error) {
+    console.error('Minification error:', error);
+  }
+}
 
 // Create minified version
 async function createMinified() {
@@ -35,4 +58,5 @@ async function createMinified() {
   }
 }
 
+createMinifiedModule();
 createMinified();
