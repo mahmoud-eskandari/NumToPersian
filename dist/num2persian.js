@@ -250,15 +250,17 @@ function fa2en(value) {
 */
 function moneyFormat(value) {
     value = en2fa(String(value));
-    if (value.length <= 3) {
-        return value;
-    }
+    var decimalIndex = value.indexOf('.');
+    var integerPart = decimalIndex === -1 ? value : value.slice(0, decimalIndex);
+    var decimalPart = decimalIndex === -1 ? '' : value.slice(decimalIndex);
+    var sign = integerPart[0] === '-' ? '-' : '';
+    var digits = sign ? integerPart.slice(1) : integerPart;
     var out = '';
     var cursor = 0;
-    for (var i = value.length - 1; i >= 0; i--) {
-        out = value[i] + (cursor > 0 && cursor % 3 === 0 && cursor !== value.length ? '،' : '') + out;
+    for (var i = digits.length - 1; i >= 0; i--) {
+        out = digits[i] + (cursor > 0 && cursor % 3 === 0 ? '،' : '') + out;
         cursor++;
     }
-    return out;
+    return sign + out + decimalPart;
 }
 

@@ -298,18 +298,20 @@ export function fa2en(value: string): string {
 */
 export function moneyFormat(value: string | number): string {
   value = en2fa(String(value))
-  if (value.length <= 3) {
-    return value
-  }
+  const decimalIndex = value.indexOf('.')
+  const integerPart = decimalIndex === -1 ? value : value.slice(0, decimalIndex)
+  const decimalPart = decimalIndex === -1 ? '' : value.slice(decimalIndex)
+  const sign = integerPart[0] === '-' ? '-' : ''
+  const digits = sign ? integerPart.slice(1) : integerPart
 
   let out = ''
   let cursor = 0
-  for (let i = value.length - 1; i >= 0; i--) {
-    out = value[i] + (cursor > 0 && cursor % 3 === 0 && cursor !== value.length ? '،' : '') + out
+  for (let i = digits.length - 1; i >= 0; i--) {
+    out = digits[i] + (cursor > 0 && cursor % 3 === 0 ? '،' : '') + out
     cursor++
   }
 
-  return out
+  return sign + out + decimalPart
 }
 
 

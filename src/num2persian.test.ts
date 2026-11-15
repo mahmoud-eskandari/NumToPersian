@@ -7,6 +7,16 @@ describe('moneyFormat', () => {
     expect(moneyFormat(123000)).toBe('۱۲۳،۰۰۰');
     expect(moneyFormat("۱۲۳۰۰۰")).toBe('۱۲۳،۰۰۰');
   });
+
+  it.each([
+    [-123, '-۱۲۳'],
+    [-123456, '-۱۲۳،۴۵۶'],
+    [1234.5, '۱،۲۳۴.۵'],
+    [1234.56, '۱،۲۳۴.۵۶'],
+    ['1234567.891', '۱،۲۳۴،۵۶۷.۸۹۱'],
+  ])('should group only integer digits for %p', (value, expected) => {
+    expect(moneyFormat(value)).toBe(expected);
+  });
 });
 
 describe('Mixed numbers', () => {
